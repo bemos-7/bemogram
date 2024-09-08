@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "84434576824",
+    "project_id": "bemogram",
+    "storage_bucket": "bemogram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84434576824:android:5194d5378b04ae85541b4d",
+        "android_client_info": {
+          "package_name": "com.bemos.bemogram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-pbbrK4h9H79KJs_UY5YwhboSsXL9PYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84434576824:android:9a9ffe7501b642e1541b4d",
+        "android_client_info": {
+          "package_name": "com.bemos.bemosgram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-pbbrK4h9H79KJs_UY5YwhboSsXL9PYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
