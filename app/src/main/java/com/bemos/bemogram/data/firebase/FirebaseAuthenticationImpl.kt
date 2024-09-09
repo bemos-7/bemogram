@@ -4,6 +4,7 @@ import android.util.Log
 import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.utils.Constants
+import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
@@ -12,6 +13,10 @@ class FirebaseAuthenticationImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firebaseFirestore: FirebaseFirestore
 ) : FirebaseAuthenticationRepository {
+    override fun isUserAuthenticatedInFirebase(): Boolean {
+        return firebaseAuth.currentUser != null
+    }
+
     override fun firebaseSignUp(username: String, email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(
             email,
@@ -26,7 +31,7 @@ class FirebaseAuthenticationImpl @Inject constructor(
                     password = password
                 )
                 firebaseFirestore
-                    .collection(Constants.COLLECTION_NAME_USERS)
+                    .collection(COLLECTION_NAME_USERS)
                     .document(userId)
                     .set(obj)
                     .addOnSuccessListener {
