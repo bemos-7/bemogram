@@ -2,6 +2,8 @@ package com.bemos.bemogram.domain.interfaces
 
 interface FirebaseAuthenticationRepository {
 
+    fun isUserAuthenticatedInFirebase() : Boolean
+
     fun firebaseSignUp(
         username: String,
         email: String,
