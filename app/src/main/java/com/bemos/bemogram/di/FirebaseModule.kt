@@ -2,6 +2,9 @@ package com.bemos.bemogram.di
 
 import com.bemos.bemogram.data.firebase.FirebaseAuthenticationImpl
 import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
+import com.bemos.bemogram.domain.use_cases.FirebaseSignInUseCase
+import com.bemos.bemogram.domain.use_cases.FirebaseSignUpUseCase
+import com.bemos.bemogram.domain.use_cases.IsUserAuthenticatedInFirebaseUseCase
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
