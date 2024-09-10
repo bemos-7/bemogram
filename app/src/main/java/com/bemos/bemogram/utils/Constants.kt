@@ -6,5 +6,7 @@ object Constants {
 
     const val NAV_NAME_SIGN_UP = "signUp"
     const val NAV_NAME_SIGN_IN = "signIn"
+    const val NAV_NAME_SPLASH = "splash"
+    const val NAV_NAME_PROFILE = "profile"
 
 }

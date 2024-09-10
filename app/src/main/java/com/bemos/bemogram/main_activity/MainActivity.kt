@@ -17,13 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val signInViewModel = hiltViewModel<SignInViewModel>()
-            val signUpViewModel = hiltViewModel<SignUpViewModel>()
             BemogramTheme {
                 AppUi(
                     navController = navController,
-                    signInViewModel = signInViewModel,
-                    signUpViewModel = signUpViewModel
                 )
             }
         }

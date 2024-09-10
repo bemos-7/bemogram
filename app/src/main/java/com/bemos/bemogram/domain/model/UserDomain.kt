@@ -1,16 +1,17 @@
 package com.bemos.bemogram.domain.model
 
 data class UserDomain(
-    val userId: String? = null,
-    val username: String? = null,
-    val bio: String? = null,
-    val imageUrl: String? = null,
-    val name: String? = null,
-    val surname: String? = null,
-    val following: List<String>? = emptyList(),
-    val followers: List<String>? = emptyList(),
-    val totalPosts: String? = null,
-    val url: String? = null,
-    val email: String,
-    val password: String
+    var userId: String? = "",
+    var username: String? = "",
+    var bio: String? = "",
+    var imageUrl: String? = "",
+    var name: String? = "",
+    var surname: String? = "",
+    var following: List<String>? = emptyList(),
+    var followers: List<String>? = emptyList(),
+    var publications: List<Int>? = emptyList(),
+    var totalPosts: String? = "",
+    var url: String? = "",
+    var email: String = "",
+    var password: String = ""
 )
