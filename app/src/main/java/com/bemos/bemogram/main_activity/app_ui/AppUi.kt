@@ -7,13 +7,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.bemos.bemogram.feature.home.HomeScreen
 import com.bemos.bemogram.feature.profile.ProfileScreen
+import com.bemos.bemogram.feature.settings.SettingsScreen
 import com.bemos.bemogram.feature.sign_in.SignInScreen
 import com.bemos.bemogram.feature.sign_in.vm.SignInViewModel
 import com.bemos.bemogram.feature.sign_up.SignUpScreen
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
+import com.bemos.bemogram.utils.Constants.NAV_NAME_HOME
 import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
+import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SPLASH
@@ -38,6 +42,12 @@ fun AppUi(
             navController = navController,
         )
         profile(
+            navController = navController
+        )
+        home(
+            navController = navController
+        )
+        settings(
             navController = navController
         )
     }
@@ -86,6 +96,32 @@ private fun NavGraphBuilder.profile(
     composable(
         route = NAV_NAME_PROFILE
     ) {
-        ProfileScreen()
+        ProfileScreen(
+            navController
+        )
+    }
+}
+
+private fun NavGraphBuilder.home(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_HOME
+    ) {
+        HomeScreen(
+            navController
+        )
+    }
+}
+
+private fun NavGraphBuilder.settings(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_SETTINGS
+    ) {
+        SettingsScreen(
+            navController
+        )
     }
 }
