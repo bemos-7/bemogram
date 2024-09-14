@@ -1,6 +1,7 @@
 package com.bemos.bemogram.feature.profile
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,7 +32,8 @@ import com.bemos.bemogram.ui.theme.Nunito
 
 @Composable
 fun ProfileContent(
-    userDocument: UserDomain?
+    userDocument: UserDomain?,
+    settingsIcon: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -52,10 +54,17 @@ fun ProfileContent(
                     modifier = Modifier.weight(1f),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    Icon(
-                        painterResource(R.drawable.round_density_medium_24),
-                        contentDescription = null
-                    )
+                    Column(
+                        modifier = Modifier.clickable {
+                            settingsIcon()
+                        }
+                    ) {
+                        Icon(
+                            painterResource(R.drawable.round_density_medium_24),
+                            contentDescription = null
+                        )
+                    }
+
                 }
             }
         }
@@ -110,7 +119,7 @@ fun ProfileInfo(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = (userDocument?.publications ?: 0).toString(),
+                    text = (userDocument?.publications?.size ?: 0).toString(),
                     fontSize = 30.sp
                 )
                 Text(
@@ -159,6 +168,7 @@ fun ProfileInfo(
 @Composable
 private fun ProfileContentPreview() {
     ProfileContent(
-        userDocument = UserDomain()
+        userDocument = UserDomain(),
+        settingsIcon = {}
     )
 }
