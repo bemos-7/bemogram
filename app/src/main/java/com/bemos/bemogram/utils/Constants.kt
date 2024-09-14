@@ -8,5 +8,7 @@ object Constants {
     const val NAV_NAME_SIGN_IN = "signIn"
     const val NAV_NAME_SPLASH = "splash"
     const val NAV_NAME_PROFILE = "profile"
+    const val NAV_NAME_HOME = "home"
+    const val NAV_NAME_SETTINGS = "settings"
 
 }
