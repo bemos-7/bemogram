@@ -7,4 +7,6 @@ interface FirebaseFirestoreRepository {
 
     suspend fun getUserDocument() : UserDomain?
 
+    suspend fun getAllUsers() : List<UserDomain>
+
 }
