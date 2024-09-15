@@ -61,4 +61,24 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateUserProfile(
+        name: String,
+        surname: String,
+        userImage: String
+    ) {
+        try {
+            val user = firebaseAuth.currentUser!!.uid
+            firestore.collection("users").document(user)
+                .set(
+                    UserDomain(
+                        name = name,
+                        surname = surname
+                    )
+                )
+        } catch (e: Exception) {
+            Log.d("updateUserError", e.message.toString())
+        }
+    }
+
+
 }
