@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.bemos.bemogram.feature.forgot_password.ForgotPasswordScreen
 import com.bemos.bemogram.feature.home.HomeScreen
 import com.bemos.bemogram.feature.profile.ProfileScreen
 import com.bemos.bemogram.feature.settings.SettingsScreen
@@ -15,6 +16,7 @@ import com.bemos.bemogram.feature.sign_in.vm.SignInViewModel
 import com.bemos.bemogram.feature.sign_up.SignUpScreen
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
+import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
 import com.bemos.bemogram.utils.Constants.NAV_NAME_HOME
 import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
@@ -40,6 +42,9 @@ fun AppUi(
         )
         signIn(
             navController = navController,
+        )
+        forgotPassword(
+            navController = navController
         )
         profile(
             navController = navController
@@ -86,6 +91,18 @@ private fun NavGraphBuilder.signIn(
     ) {
         SignInScreen(
             navController = navController,
+        )
+    }
+}
+
+private fun NavGraphBuilder.forgotPassword(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_FORGOT_PASSWORD
+    ) {
+        ForgotPasswordScreen(
+            navController = navController
         )
     }
 }
