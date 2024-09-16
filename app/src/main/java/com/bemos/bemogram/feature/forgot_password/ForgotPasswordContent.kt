@@ -101,8 +101,8 @@ fun ForgotPasswordContent(
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Enter your email and" +
-                        "we'll send\n you a otp to get back into your\n" +
+                text = "Enter your email and " +
+                        "we'll send\n you a link to get back into your\n" +
                         "account.",
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center
