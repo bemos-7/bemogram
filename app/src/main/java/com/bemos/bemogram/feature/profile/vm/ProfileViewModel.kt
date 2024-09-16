@@ -25,11 +25,7 @@ class ProfileViewModel @Inject constructor(
         null
     )
 
-    init {
-        getUserDocument()
-    }
-
-    private fun getUserDocument() = viewModelScope.launch {
+    fun getUserDocument() = viewModelScope.launch {
         try {
             val user = getDocumentUseCase.execute()
             Log.d("userDocument", user?.email ?: "null")

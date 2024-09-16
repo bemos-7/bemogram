@@ -59,5 +59,8 @@ class FirebaseAuthenticationImpl @Inject constructor(
     override fun firebaseSignOut() {
         firebaseAuth.signOut()
     }
+    override fun firebaseSendPasswordReset(email: String) {
+        firebaseAuth.sendPasswordResetEmail(email)
+    }
 
 }

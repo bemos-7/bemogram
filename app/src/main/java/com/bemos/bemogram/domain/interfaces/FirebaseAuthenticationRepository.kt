@@ -17,4 +17,6 @@ interface FirebaseAuthenticationRepository {
 
     fun firebaseSignOut()
 
+    fun firebaseSendPasswordReset(email: String)
+
 }

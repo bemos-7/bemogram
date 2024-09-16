@@ -10,5 +10,6 @@ object Constants {
     const val NAV_NAME_PROFILE = "profile"
     const val NAV_NAME_HOME = "home"
     const val NAV_NAME_SETTINGS = "settings"
+    const val NAV_NAME_FORGOT_PASSWORD = "forgotPass"
 
 }

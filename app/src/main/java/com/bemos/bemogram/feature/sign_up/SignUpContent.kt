@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.sign_in.SignInContent
 import com.bemos.bemogram.feature.utils.passwordConfirmation
+import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
 
 @Composable
 fun SignUpContent(
@@ -58,11 +60,9 @@ fun SignUpContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextField(
+        TextFieldCustom(
             value = email,
-            onValueChange = {
-                email = it
-            },
+            onValueChange = { email = it },
             label = {
                 Text(
                     text = "Email"
@@ -72,11 +72,9 @@ fun SignUpContent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        TextField(
+        TextFieldCustom(
             value = username,
-            onValueChange = {
-                username = it
-            },
+            onValueChange = { username = it },
             label = {
                 Text(
                     text = "Username"
@@ -86,11 +84,9 @@ fun SignUpContent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        TextField(
+        TextFieldCustom(
             value = password,
-            onValueChange = {
-                password = it
-            },
+            onValueChange = { password = it },
             label = {
                 Text(
                     text = "Password"
@@ -100,11 +96,9 @@ fun SignUpContent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        TextField(
+        TextFieldCustom(
             value = passwordConfirm,
-            onValueChange = {
-                passwordConfirm = it
-            },
+            onValueChange = { passwordConfirm = it },
             label = {
                 Text(
                     text = "Confirm password"
@@ -124,6 +118,7 @@ fun SignUpContent(
                     )
                 )
             },
+            shape = RoundedCornerShape(10.dp),
             enabled = passwordConfirmation(password, passwordConfirm)
         ) {
             Text(
