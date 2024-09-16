@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,11 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.utils.passwordConfirmation
+import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
 
 @Composable
 fun SignInContent(
     signInButton: (UserDomain) -> Unit,
-    registerAccount: () -> Unit
+    registerAccount: () -> Unit,
+    forgotPassword: () -> Unit
 ) {
     var email by remember {
         mutableStateOf("")
@@ -48,7 +52,7 @@ fun SignInContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextField(
+        TextFieldCustom(
             value = email,
             onValueChange = {
                 email = it
@@ -62,7 +66,7 @@ fun SignInContent(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        TextField(
+        TextFieldCustom(
             value = password,
             onValueChange = {
                 password = it
@@ -73,6 +77,21 @@ fun SignInContent(
                 )
             }
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Column(
+            modifier = Modifier
+                .width(280.dp)
+                .clickable {
+                    forgotPassword()
+                },
+            horizontalAlignment = Alignment.End
+        ) {
+            Text(
+                text = "Forgot password?"
+            )
+        }
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -85,6 +104,7 @@ fun SignInContent(
                     )
                 )
             },
+            shape = RoundedCornerShape(10.dp),
             enabled = passwordConfirmation(password, password)
         ) {
             Text(
@@ -133,6 +153,7 @@ fun SignInContent(
 fun SignInContentPreview() {
     SignInContent(
         signInButton = {},
-        registerAccount = {}
+        registerAccount = {},
+        forgotPassword = {}
     )
 }
