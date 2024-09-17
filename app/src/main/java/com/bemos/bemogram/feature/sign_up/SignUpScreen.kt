@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
+import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
 
@@ -22,7 +23,7 @@ fun SignUpScreen(
                 email = it.email,
                 password = it.password
             )
-            navController.navigate(NAV_NAME_SIGN_IN)
+            navController.navigate(NAV_NAME_EDIT_PROFILE)
         }
     )
 }
