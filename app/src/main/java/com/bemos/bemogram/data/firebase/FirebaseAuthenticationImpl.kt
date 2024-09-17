@@ -34,9 +34,6 @@ class FirebaseAuthenticationImpl @Inject constructor(
                     .collection(COLLECTION_NAME_USERS)
                     .document(userId)
                     .set(obj)
-                    .addOnSuccessListener {
-
-                }
             } else {
                 Log.d("SignUp", "createUserWithEmailAndPassword Failed: ", task.exception)
             }
