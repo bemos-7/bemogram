@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.bemos.bemogram.feature.edit_profile.EditProfileScreen
 import com.bemos.bemogram.feature.forgot_password.ForgotPasswordScreen
 import com.bemos.bemogram.feature.home.HomeScreen
 import com.bemos.bemogram.feature.profile.ProfileScreen
@@ -16,6 +17,7 @@ import com.bemos.bemogram.feature.sign_in.vm.SignInViewModel
 import com.bemos.bemogram.feature.sign_up.SignUpScreen
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
+import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
 import com.bemos.bemogram.utils.Constants.NAV_NAME_HOME
 import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
@@ -47,6 +49,9 @@ fun AppUi(
             navController = navController
         )
         profile(
+            navController = navController
+        )
+        editProfile(
             navController = navController
         )
         home(
@@ -115,6 +120,18 @@ private fun NavGraphBuilder.profile(
     ) {
         ProfileScreen(
             navController
+        )
+    }
+}
+
+private fun NavGraphBuilder.editProfile(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_EDIT_PROFILE
+    ) {
+        EditProfileScreen(
+            navController = navController
         )
     }
 }
