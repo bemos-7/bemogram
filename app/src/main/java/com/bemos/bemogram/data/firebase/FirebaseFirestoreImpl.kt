@@ -20,19 +20,21 @@ class FirebaseFirestoreImpl @Inject constructor(
 ) : FirebaseFirestoreRepository {
 
     override suspend fun getUserDocument(): UserDomain? = suspendCoroutine { continuation ->
-        val docRef = firestore.collection(COLLECTION_NAME_USERS).document(firebaseAuth.currentUser!!.uid)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val user = document.toObject(UserDomain::class.java)
-                    continuation.resume(user)
-                } else {
-                    continuation.resume(null)
+        try {
+            val docRef = firestore.collection(COLLECTION_NAME_USERS).document(firebaseAuth.currentUser!!.uid)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val user = document.toObject(UserDomain::class.java)
+                        continuation.resume(user)
+                    } else {
+                        continuation.resume(null)
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                continuation.resumeWithException(exception = exception)
-            }
+        } catch (e: Exception) {
+            Log.d("getUserDocumentError", e.message.toString())
+        }
+
     }
 
     override suspend fun getAllUsers(): List<UserDomain> = suspendCancellableCoroutine { continuation ->
@@ -52,11 +54,8 @@ class FirebaseFirestoreImpl @Inject constructor(
                     }
                     continuation.resume(uniqueModels)
                 }
-                .addOnFailureListener {
-                    continuation.resumeWithException(it)
-                }
         } catch (e: Exception) {
-            Log.d("Firestore", "Error")
+            Log.d("getAllUsersError", e.message.toString())
             continuation.resumeWithException(e)
         }
     }
@@ -68,17 +67,18 @@ class FirebaseFirestoreImpl @Inject constructor(
     ) {
         try {
             val user = firebaseAuth.currentUser!!.uid
+            val updates = hashMapOf<String, Any>()
+
+            updates["name"] = name
+            updates["surname"] = surname
+            updates["imageUrl"] = userImage
+
             firestore.collection("users").document(user)
-                .set(
-                    UserDomain(
-                        name = name,
-                        surname = surname
-                    )
+                .update(
+                    updates
                 )
         } catch (e: Exception) {
             Log.d("updateUserError", e.message.toString())
         }
     }
-
-
 }
