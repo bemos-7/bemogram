@@ -1,6 +1,13 @@
 package com.bemos.bemogram.feature.edit_profile
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,14 +26,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.bemogram.feature.edit_profile.models.UserInfo
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
+import kotlin.contracts.contract
 
 @Composable
 fun EditProfileContent(
-    continueButtonClick: (UserDomain) -> Unit
+    continueButtonClick: (UserInfo) -> Unit
 ) {
     var name by remember {
         mutableStateOf("")
@@ -34,6 +45,22 @@ fun EditProfileContent(
     var surname by remember {
         mutableStateOf("")
     }
+    var imageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    val intent = Intent(Intent.ACTION_PICK)
+    intent.type = "image/*"
+    val galleryLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                imageUri = uri
+            }
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,10 +69,21 @@ fun EditProfileContent(
         verticalArrangement = Arrangement.Center
     ) {
         Card(
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .clickable {
+
+                    galleryLauncher.launch(intent)
+                },
             shape = RoundedCornerShape(1000.dp)
         ) {
-
+            if (imageUri != null) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = rememberImagePainter( data = imageUri),
+                    contentDescription = null
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -77,10 +115,10 @@ fun EditProfileContent(
         Button(
             onClick = {
                 continueButtonClick(
-                    UserDomain(
+                    UserInfo(
                         name = name,
                         surname = surname,
-                        imageUrl = ""
+                        userImage = imageUri
                     )
                 )
             }
