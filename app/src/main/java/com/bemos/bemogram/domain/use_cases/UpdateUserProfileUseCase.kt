@@ -1,5 +1,6 @@
 package com.bemos.bemogram.domain.use_cases
 
+import android.net.Uri
 import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
 import javax.inject.Inject
 
@@ -9,7 +10,7 @@ class UpdateUserProfileUseCase @Inject constructor(
     suspend fun execute(
         name: String,
         surname: String,
-        imageUser: String
+        imageUser: Uri?
     ) {
         repository.updateUserProfile(
             name,

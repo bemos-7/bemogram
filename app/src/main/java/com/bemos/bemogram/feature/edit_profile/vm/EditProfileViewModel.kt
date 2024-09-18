@@ -1,5 +1,6 @@
 package com.bemos.bemogram.feature.edit_profile.vm
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bemos.bemogram.domain.use_cases.UpdateUserProfileUseCase
@@ -15,7 +16,7 @@ class EditProfileViewModel @Inject constructor(
     fun updateUserProfile(
         name: String,
         surname: String,
-        imageUser: String
+        imageUser: Uri?
     ) = viewModelScope.launch {
         updateUserProfileUseCase.execute(
             name = name,

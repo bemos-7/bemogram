@@ -7,11 +7,12 @@ import com.bemos.bemogram.utils.Constants
 import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import javax.inject.Inject
 
 class FirebaseAuthenticationImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore,
 ) : FirebaseAuthenticationRepository {
     override fun isUserAuthenticatedInFirebase(): Boolean {
         return firebaseAuth.currentUser != null

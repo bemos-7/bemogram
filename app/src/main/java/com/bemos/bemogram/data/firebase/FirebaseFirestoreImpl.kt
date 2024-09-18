@@ -1,5 +1,6 @@
 package com.bemos.bemogram.data.firebase
 
+import android.net.Uri
 import android.util.Log
 import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
 import com.bemos.bemogram.domain.model.UserDomain
@@ -7,6 +8,7 @@ import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -16,7 +18,8 @@ import kotlin.coroutines.suspendCoroutine
 
 class FirebaseFirestoreImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val firebaseStorage: FirebaseStorage
 ) : FirebaseFirestoreRepository {
 
     override suspend fun getUserDocument(): UserDomain? = suspendCoroutine { continuation ->
@@ -60,25 +63,37 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateUserProfile(
-        name: String,
-        surname: String,
-        userImage: String
-    ) {
+    override suspend fun updateUserProfile(name: String, surname: String, userImage: Uri?) {
         try {
             val user = firebaseAuth.currentUser!!.uid
             val updates = hashMapOf<String, Any>()
 
             updates["name"] = name
             updates["surname"] = surname
-            updates["imageUrl"] = userImage
 
             firestore.collection("users").document(user)
                 .update(
                     updates
                 )
+
+            userImage?.let {
+                uploadImageToFirebase(
+                    it
+                )
+            }
         } catch (e: Exception) {
             Log.d("updateUserError", e.message.toString())
+        }
+    }
+
+    override suspend fun uploadImageToFirebase(imageUri: Uri) {
+        try {
+            val user = firebaseAuth.currentUser!!.uid
+            firebaseStorage.reference.child(
+                "images/${user}/avatar.jpg"
+            ).putFile(imageUri)
+        } catch (e: Exception) {
+            Log.d("uploadImageToFirebaseError", e.message.toString())
         }
     }
 }
