@@ -16,14 +16,11 @@ fun EditProfileScreen(
     EditProfileContent(
         continueButtonClick = {
             viewModel.updateUserProfile(
-                name = it.name.toString(),
-                surname = it.surname.toString(),
-                imageUser = ""
+                name = it.name,
+                surname = it.surname,
+                imageUser = it.userImage
             )
             navController.navigate(NAV_NAME_PROFILE)
         }
     )
-
-    val intent = Intent(Intent.ACTION_PICK)
-    intent.type = "image/*"
 }
