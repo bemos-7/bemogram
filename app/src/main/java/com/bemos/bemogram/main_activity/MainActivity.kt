@@ -42,9 +42,9 @@ class MainActivity : ComponentActivity() {
             BemogramTheme {
                 Scaffold(
                     bottomBar = {
-//                        BottomBar(
-//                            navController
-//                        )
+                        BottomBar(
+                            navController
+                        )
                     }
                 ) {
                     AppUi(
