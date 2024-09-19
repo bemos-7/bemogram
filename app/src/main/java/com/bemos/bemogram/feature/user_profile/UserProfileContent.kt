@@ -1,4 +1,4 @@
-package com.bemos.bemogram.feature.profile
+package com.bemos.bemogram.feature.user_profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,9 +37,8 @@ import com.bemos.bemogram.ui.theme.Nunito
 import com.google.firebase.firestore.auth.User
 
 @Composable
-fun ProfileContent(
+fun UserProfileContent(
     userDocument: UserDomain?,
-    settingsIcon: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -56,23 +55,6 @@ fun ProfileContent(
                     fontFamily = Nunito,
                     color = MaterialTheme.colorScheme.onBackground
                 )
-                Row(
-                    modifier = Modifier.weight(1f),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Column(
-                        modifier = Modifier.clickable {
-                            settingsIcon()
-                        }
-                    ) {
-                        Icon(
-                            painterResource(R.drawable.round_density_medium_24),
-                            contentDescription = null
-                        )
-                    }
-
-                }
-
             }
         }
     ) {
@@ -188,17 +170,31 @@ fun ProfileInfo(
                     )
                 }
             }
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                   Button(
+                       shape = RoundedCornerShape(10.dp),
+                       onClick = {
+
+                       }
+                   ) {
+                        Text(
+                            text = "Send a Message"
+                        )
+                   }
+                }
         }
     }
 }
 
 @Preview
 @Composable
-private fun ProfileContentPreview() {
-    ProfileContent(
+private fun UserProfileContentPreview() {
+    UserProfileContent(
         userDocument = UserDomain(
             username = "Radrigo"
-        ),
-        settingsIcon = {}
+        )
     )
 }

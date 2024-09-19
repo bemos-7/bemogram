@@ -89,9 +89,12 @@ class FirebaseFirestoreImpl @Inject constructor(
     override suspend fun uploadImageToFirebase(imageUri: Uri) {
         try {
             val user = firebaseAuth.currentUser!!.uid
-            firebaseStorage.reference.child(
-                "images/${user}/avatar.jpg"
-            ).putFile(imageUri)
+            val imageRef = firebaseStorage.reference.child("images/$user/avatar.jpg")
+            val uploadTask = imageRef.putFile(imageUri).await()
+            val downloadUrl = imageRef.downloadUrl.await()
+
+            firestore.collection("users").document(user)
+                .update("imageUrl", downloadUrl.toString())
         } catch (e: Exception) {
             Log.d("uploadImageToFirebaseError", e.message.toString())
         }

@@ -1,4 +1,4 @@
-package com.bemos.bemogram.feature.profile
+package com.bemos.bemogram.feature.user_profile
 
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -13,19 +13,13 @@ import com.bemos.bemogram.feature.profile.vm.ProfileViewModel
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 
 @Composable
-fun ProfileScreen(
-    navController: NavController
+fun UserProfileScreen(
+    navController: NavController,
+    userDomain: UserDomain?
 ) {
-    val viewModel: ProfileViewModel = hiltViewModel()
-    val userDocument by viewModel.userDocument.collectAsState()
 
-    viewModel.getUserDocument()
-
-    ProfileContent(
-        userDocument = userDocument,
-        settingsIcon = {
-            navController.navigate(NAV_NAME_SETTINGS)
-        }
+    UserProfileContent(
+        userDocument = userDomain
     )
 
 }

@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.edit_profile.EditProfileScreen
 import com.bemos.bemogram.feature.forgot_password.ForgotPasswordScreen
 import com.bemos.bemogram.feature.home.HomeScreen
@@ -17,6 +18,8 @@ import com.bemos.bemogram.feature.sign_in.vm.SignInViewModel
 import com.bemos.bemogram.feature.sign_up.SignUpScreen
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
+import com.bemos.bemogram.feature.user_profile.UserProfileScreen
+import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
 import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
 import com.bemos.bemogram.utils.Constants.NAV_NAME_HOME
@@ -25,6 +28,7 @@ import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SPLASH
+import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_PROFILE
 
 @Composable
 fun AppUi(
@@ -49,6 +53,9 @@ fun AppUi(
             navController = navController
         )
         profile(
+            navController = navController
+        )
+        userProfile(
             navController = navController
         )
         editProfile(
@@ -119,8 +126,23 @@ private fun NavGraphBuilder.profile(
         route = NAV_NAME_PROFILE
     ) {
         ProfileScreen(
-            navController
+            navController = navController
         )
+    }
+}
+
+private fun NavGraphBuilder.userProfile(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_USER_PROFILE
+    ) {
+        navController.previousBackStackEntry?.savedStateHandle?.get<UserDomain>(NAV_INTENT_ITEM_USER)?.let {
+            UserProfileScreen(
+                navController,
+                it
+            )
+        }
     }
 }
 

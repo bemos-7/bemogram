@@ -10,6 +10,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.home.vm.HomeViewModel
+import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
+import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
+import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_PROFILE
 
 @Composable
 fun HomeScreen(
@@ -30,6 +33,10 @@ fun HomeScreen(
         searchUsers,
         searchUser = {
             viewModel.searchUser(it)
+        },
+        onUserClick = {
+            navController.currentBackStackEntry?.savedStateHandle?.set(NAV_INTENT_ITEM_USER, it)
+            navController.navigate(NAV_NAME_USER_PROFILE)
         }
     )
 }
