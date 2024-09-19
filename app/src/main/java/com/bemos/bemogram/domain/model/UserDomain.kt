@@ -1,5 +1,9 @@
 package com.bemos.bemogram.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class UserDomain(
     var userId: String? = "",
     var username: String? = "",
@@ -14,4 +18,4 @@ data class UserDomain(
     var url: String? = "",
     var email: String = "",
     var password: String = ""
-)
+) : Parcelable
