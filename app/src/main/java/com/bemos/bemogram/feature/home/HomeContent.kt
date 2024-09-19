@@ -23,7 +23,8 @@ import com.bemos.bemogram.feature.home.ui.MiniProfile
 @Composable
 fun HomeContent(
     users: List<UserDomain>,
-    searchUser: (String) -> Unit
+    searchUser: (String) -> Unit,
+    onUserClick: (UserDomain) -> Unit
 ) {
     val search = remember {
         mutableStateOf("")
@@ -61,7 +62,8 @@ fun HomeContent(
             LazyColumn {
                 items(items = users) {
                     MiniProfile(
-                        it
+                        user = it,
+                        onUserClick = onUserClick
                     )
                 }
             }
@@ -79,6 +81,9 @@ private fun HomeContentPreview() {
             )
         ),
         searchUser = {
+
+        },
+        onUserClick = {
 
         }
     )
