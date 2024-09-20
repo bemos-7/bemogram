@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.bemogram.feature.chats.ChatsScreen
 import com.bemos.bemogram.feature.edit_profile.EditProfileScreen
 import com.bemos.bemogram.feature.forgot_password.ForgotPasswordScreen
 import com.bemos.bemogram.feature.home.HomeScreen
@@ -20,6 +21,7 @@ import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
 import com.bemos.bemogram.feature.user_profile.UserProfileScreen
 import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
+import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
 import com.bemos.bemogram.utils.Constants.NAV_NAME_HOME
@@ -65,6 +67,9 @@ fun AppUi(
             navController = navController
         )
         settings(
+            navController = navController
+        )
+        chats(
             navController = navController
         )
     }
@@ -178,6 +183,18 @@ private fun NavGraphBuilder.settings(
     ) {
         SettingsScreen(
             navController
+        )
+    }
+}
+
+private fun NavGraphBuilder.chats(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_CHATS
+    ) {
+        ChatsScreen(
+            navController = navController
         )
     }
 }
