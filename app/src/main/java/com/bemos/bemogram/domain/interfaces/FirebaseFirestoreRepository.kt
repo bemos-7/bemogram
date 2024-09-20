@@ -10,6 +10,8 @@ interface FirebaseFirestoreRepository {
 
     suspend fun getAllUsers() : List<UserDomain>
 
+    fun getUserUid() : String
+
     suspend fun updateUserProfile(name: String, surname: String = "", userImage: Uri?)
 
     suspend fun uploadImageToFirebase(imageUri: Uri)
