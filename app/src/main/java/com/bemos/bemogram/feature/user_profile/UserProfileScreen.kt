@@ -19,11 +19,16 @@ fun UserProfileScreen(
     userDomain: UserDomain?
 ) {
     val viewModel: UserProfileViewModel = hiltViewModel()
+    val userId by viewModel.userIdFlow.collectAsState()
+    viewModel.getUserUid()
 
     UserProfileContent(
         userDocument = userDomain,
         startMessages = {
-
+            viewModel.createChat(
+                firstUserId = userId,
+                secondUserId = it.userId!!
+            )
         }
     )
 
