@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.profile.vm.ProfileViewModel
+import com.bemos.bemogram.feature.user_profile.vm.UserProfileViewModel
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 
 @Composable
@@ -17,9 +18,13 @@ fun UserProfileScreen(
     navController: NavController,
     userDomain: UserDomain?
 ) {
+    val viewModel: UserProfileViewModel = hiltViewModel()
 
     UserProfileContent(
-        userDocument = userDomain
+        userDocument = userDomain,
+        startMessages = {
+
+        }
     )
 
 }

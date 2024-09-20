@@ -39,6 +39,7 @@ import com.google.firebase.firestore.auth.User
 @Composable
 fun UserProfileContent(
     userDocument: UserDomain?,
+    startMessages: (UserDomain) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -65,7 +66,8 @@ fun UserProfileContent(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             ProfileInfo(
-                userDocument
+                userDocument,
+                startMessages
             )
             Column {
                 Row(
@@ -89,7 +91,8 @@ fun UserProfileContent(
 
 @Composable
 fun ProfileInfo(
-    userDocument: UserDomain?
+    userDocument: UserDomain?,
+    startMessages: (UserDomain) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -177,7 +180,7 @@ fun ProfileInfo(
                    Button(
                        shape = RoundedCornerShape(10.dp),
                        onClick = {
-
+                               startMessages(userDocument!!)
                        }
                    ) {
                         Text(
@@ -194,7 +197,8 @@ fun ProfileInfo(
 private fun UserProfileContentPreview() {
     UserProfileContent(
         userDocument = UserDomain(
-            username = "Radrigo"
-        )
+            username = "Radrigo",
+        ),
+        startMessages = {}
     )
 }
