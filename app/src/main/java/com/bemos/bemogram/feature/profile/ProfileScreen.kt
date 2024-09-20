@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.profile.vm.ProfileViewModel
+import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 
 @Composable
@@ -25,6 +26,9 @@ fun ProfileScreen(
         userDocument = userDocument,
         settingsIcon = {
             navController.navigate(NAV_NAME_SETTINGS)
+        },
+        chatsIcon = {
+            navController.navigate(NAV_NAME_CHATS)
         }
     )
 

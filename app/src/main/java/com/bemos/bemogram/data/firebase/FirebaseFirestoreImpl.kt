@@ -63,6 +63,10 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
+    override fun getUserUid(): String {
+        return firebaseAuth.currentUser!!.uid
+    }
+
     override suspend fun updateUserProfile(name: String, surname: String, userImage: Uri?) {
         try {
             val user = firebaseAuth.currentUser!!.uid

@@ -2,8 +2,9 @@ package com.bemos.bemogram.data.firebase
 
 import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import com.google.firebase.database.FirebaseDatabase
+import javax.inject.Inject
 
-class FirebaseRealtimeDatabaseImpl(
+class FirebaseRealtimeDatabaseImpl @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ) : FirebaseRealtimeDatabaseRepository {
     override fun createChat(firstUserId: String, secondUserId: String) {
@@ -30,8 +31,12 @@ class FirebaseRealtimeDatabaseImpl(
             }
     }
 
-    override fun getUserChats(userId: String) {
-        TODO("Not yet implemented")
+    override fun getUserChats(userId: String, onComplete: (List<String>) -> Unit) {
+        val userChatsRef = firebaseDatabase.reference.database.getReference("users").child(userId).child("chats")
+        userChatsRef.get().addOnSuccessListener { dataSnapshot ->
+            val chatId = dataSnapshot.children.map { it.key!! }
+            onComplete(chatId)
+        }
     }
 
 
