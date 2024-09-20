@@ -2,8 +2,9 @@ package com.bemos.bemogram.data.firebase
 
 import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import com.google.firebase.database.FirebaseDatabase
+import javax.inject.Inject
 
-class FirebaseRealtimeDatabaseImpl(
+class FirebaseRealtimeDatabaseImpl @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ) : FirebaseRealtimeDatabaseRepository {
     override fun createChat(firstUserId: String, secondUserId: String) {
