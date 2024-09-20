@@ -30,8 +30,12 @@ class FirebaseRealtimeDatabaseImpl(
             }
     }
 
-    override fun getUserChats(userId: String) {
-        TODO("Not yet implemented")
+    override fun getUserChats(userId: String, onComplete: (List<String>) -> Unit) {
+        val userChatsRef = firebaseDatabase.reference.database.getReference("users").child(userId).child("chats")
+        userChatsRef.get().addOnSuccessListener { dataSnapshot ->
+            val chatId = dataSnapshot.children.map { it.key!! }
+            onComplete(chatId)
+        }
     }
 
 
