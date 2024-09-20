@@ -39,7 +39,8 @@ import com.google.firebase.firestore.auth.User
 @Composable
 fun ProfileContent(
     userDocument: UserDomain?,
-    settingsIcon: () -> Unit
+    settingsIcon: () -> Unit,
+    chatsIcon: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -62,6 +63,19 @@ fun ProfileContent(
                 ) {
                     Column(
                         modifier = Modifier.clickable {
+                            chatsIcon()
+                        }
+                    ) {
+                        Icon(
+                            painterResource(R.drawable.round_chat_24),
+                            contentDescription = null
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Column(
+                        modifier = Modifier.clickable {
                             settingsIcon()
                         }
                     ) {
@@ -70,7 +84,6 @@ fun ProfileContent(
                             contentDescription = null
                         )
                     }
-
                 }
 
             }
@@ -199,6 +212,7 @@ private fun ProfileContentPreview() {
         userDocument = UserDomain(
             username = "Radrigo"
         ),
-        settingsIcon = {}
+        settingsIcon = {},
+        chatsIcon = {}
     )
 }
