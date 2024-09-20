@@ -7,7 +7,8 @@ interface FirebaseRealtimeDatabaseRepository {
     )
 
     fun getUserChats(
-        userId: String
+        userId: String,
+        onComplete: (List<String>) -> Unit
     )
 
 }
