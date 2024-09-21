@@ -103,4 +103,22 @@ class FirebaseFirestoreImpl @Inject constructor(
             Log.d("uploadImageToFirebaseError", e.message.toString())
         }
     }
+
+    override suspend fun getUserDocumentById(userId: String): UserDomain? = suspendCoroutine { continuation ->
+        try {
+            val docRef = firestore.collection(COLLECTION_NAME_USERS).document(userId)
+            docRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot != null) {
+                        val user = documentSnapshot.toObject<UserDomain>()
+                        continuation.resume(user)
+                    } else {
+                        continuation.resume(null)
+                    }
+                }
+        } catch (e: Exception) {
+            continuation.resumeWithException(e)
+            Log.d("getUserDocumentByIdError", e.message.toString())
+        }
+    }
 }
