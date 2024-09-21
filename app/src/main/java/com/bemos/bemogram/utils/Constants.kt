@@ -13,8 +13,11 @@ object Constants {
     const val NAV_NAME_HOME = "home"
     const val NAV_NAME_SETTINGS = "settings"
     const val NAV_NAME_CHATS = "chats"
+    const val NAV_NAME_USER_CHAT = "userChat"
+    const val NAV_NAME_USER_CHAT_WITH_CHAT_ID = "userChat/{chatId}"
     const val NAV_NAME_FORGOT_PASSWORD = "forgotPass"
 
     const val NAV_INTENT_ITEM_USER = "user"
+    const val NAV_INTENT_ITEM_CHAT_ID = "chatId"
 
 }
