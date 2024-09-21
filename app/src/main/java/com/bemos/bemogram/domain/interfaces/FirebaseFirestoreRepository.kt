@@ -16,4 +16,6 @@ interface FirebaseFirestoreRepository {
 
     suspend fun uploadImageToFirebase(imageUri: Uri)
 
+    suspend fun getUserDocumentById(userId: String): UserDomain?
+
 }
