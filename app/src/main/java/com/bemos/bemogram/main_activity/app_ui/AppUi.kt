@@ -5,8 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.chats.ChatsScreen
 import com.bemos.bemogram.feature.edit_profile.EditProfileScreen
@@ -19,7 +21,9 @@ import com.bemos.bemogram.feature.sign_in.vm.SignInViewModel
 import com.bemos.bemogram.feature.sign_up.SignUpScreen
 import com.bemos.bemogram.feature.sign_up.vm.SignUpViewModel
 import com.bemos.bemogram.feature.splash.SplashScreen
+import com.bemos.bemogram.feature.user_chats.UserChatScreen
 import com.bemos.bemogram.feature.user_profile.UserProfileScreen
+import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_CHAT_ID
 import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
 import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
@@ -30,6 +34,8 @@ import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SPLASH
+import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT
+import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT_WITH_CHAT_ID
 import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_PROFILE
 
 @Composable
@@ -70,6 +76,9 @@ fun AppUi(
             navController = navController
         )
         chats(
+            navController = navController
+        )
+        userChat(
             navController = navController
         )
     }
@@ -195,6 +204,24 @@ private fun NavGraphBuilder.chats(
     ) {
         ChatsScreen(
             navController = navController
+        )
+    }
+}
+
+private fun NavGraphBuilder.userChat(
+    navController: NavController
+) {
+    composable(
+        route = NAV_NAME_USER_CHAT_WITH_CHAT_ID,
+        arguments = listOf(
+            navArgument(NAV_INTENT_ITEM_CHAT_ID) {
+                type = NavType.StringType
+            }
+        )
+    ) { navBackStackEntry ->
+        UserChatScreen(
+            navController = navController,
+            chatId = navBackStackEntry.arguments?.getString(NAV_INTENT_ITEM_CHAT_ID)!!
         )
     }
 }
