@@ -1,5 +1,7 @@
 package com.bemos.bemogram.domain.interfaces
 
+import com.bemos.bemogram.domain.model.MessageDomain
+
 interface FirebaseRealtimeDatabaseRepository {
 
     fun createChat(
@@ -9,6 +11,15 @@ interface FirebaseRealtimeDatabaseRepository {
     fun getUserChats(
         userId: String,
         onComplete: (List<String>) -> Unit
+    )
+
+    fun sendMessage(
+        message: MessageDomain
+    )
+
+    fun listenForMessages(
+        chatId: String,
+        onNewMessage: (MessageDomain) -> Unit
     )
 
 }
