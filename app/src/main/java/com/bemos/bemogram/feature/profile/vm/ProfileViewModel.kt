@@ -25,13 +25,15 @@ class ProfileViewModel @Inject constructor(
         null
     )
 
-    fun getUserDocument() = viewModelScope.launch {
+    fun getUserDocument() {
         try {
-            val user = getDocumentUseCase.execute()
-            Log.d("userDocument", user?.email ?: "null")
-            userDocument.update {
-                user
-            }
+            getDocumentUseCase.execute(
+                onComplete = { user ->
+                    userDocument.update {
+                        user
+                    }
+                }
+            )
         } catch (e: Exception) {
             Log.d("userDocument", e.toString())
             userDocument.update {
