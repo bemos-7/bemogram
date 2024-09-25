@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetUserDocumentUseCase @Inject constructor(
     private val repository: FirebaseFirestoreRepository
 ) {
-    suspend fun execute() : UserDomain? {
-        return repository.getUserDocument()
+    fun execute(onComplete: (UserDomain?) -> Unit) {
+        return repository.getUserDocument(onComplete)
     }
 }

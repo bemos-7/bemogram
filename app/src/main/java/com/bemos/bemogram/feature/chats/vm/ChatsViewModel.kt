@@ -45,13 +45,15 @@ class ChatsViewModel @Inject constructor(
         )
     }
 
-    suspend fun getUserDocumentById(userId: String) {
-        val user = getUserDocumentByIdUseCase.execute(
-            userId = userId
+    fun getUserDocumentById(userId: String) {
+        getUserDocumentByIdUseCase.execute(
+            userId = userId,
+            onComplete = { user ->
+                userDocument.update {
+                    user
+                }
+            }
         )
-        userDocument.update {
-            user
-        }
     }
 
     private fun getUserUid() {

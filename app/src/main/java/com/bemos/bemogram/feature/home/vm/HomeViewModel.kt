@@ -20,12 +20,15 @@ class HomeViewModel @Inject constructor(
 
     val searchUsers = MutableStateFlow<List<UserDomain>>(emptyList())
 
-    suspend fun getAllUsers() = viewModelScope.launch {
+    fun getAllUsers() = viewModelScope.launch {
         try {
-            val users = repository.getAllUsers()
-            allUsers.update {
-                users
-            }
+            repository.getAllUsers(
+                onUserList = { users ->
+                    allUsers.update {
+                        users
+                    }
+                }
+            )
         } catch (e: Exception) {
             Log.d("getAllUsersError", e.message.toString())
         }

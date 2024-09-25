@@ -22,16 +22,14 @@ class FirebaseFirestoreImpl @Inject constructor(
     private val firebaseStorage: FirebaseStorage
 ) : FirebaseFirestoreRepository {
 
-    override suspend fun getUserDocument(): UserDomain? = suspendCoroutine { continuation ->
+    override fun getUserDocument(onComplete: (UserDomain?) -> Unit) {
         try {
             val docRef = firestore.collection(COLLECTION_NAME_USERS).document(firebaseAuth.currentUser!!.uid)
             docRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         val user = document.toObject(UserDomain::class.java)
-                        continuation.resume(user)
-                    } else {
-                        continuation.resume(null)
+                        onComplete(user)
                     }
                 }
         } catch (e: Exception) {
@@ -40,7 +38,7 @@ class FirebaseFirestoreImpl @Inject constructor(
 
     }
 
-    override suspend fun getAllUsers(): List<UserDomain> = suspendCancellableCoroutine { continuation ->
+    override fun getAllUsers(onUserList: (List<UserDomain>) -> Unit) {
         try {
             val docRef = firestore.collection(COLLECTION_NAME_USERS)
             docRef.get()
@@ -55,11 +53,10 @@ class FirebaseFirestoreImpl @Inject constructor(
                             )
                         }
                     }
-                    continuation.resume(uniqueModels)
+                    onUserList(uniqueModels)
                 }
         } catch (e: Exception) {
             Log.d("getAllUsersError", e.message.toString())
-            continuation.resumeWithException(e)
         }
     }
 
@@ -67,7 +64,7 @@ class FirebaseFirestoreImpl @Inject constructor(
         return firebaseAuth.currentUser!!.uid
     }
 
-    override suspend fun updateUserProfile(name: String, surname: String, userImage: Uri?) {
+    override fun updateUserProfile(name: String, surname: String, userImage: Uri?) {
         try {
             val user = firebaseAuth.currentUser!!.uid
             val updates = hashMapOf<String, Any>()
@@ -90,12 +87,12 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
-    override suspend fun uploadImageToFirebase(imageUri: Uri) {
+    override fun uploadImageToFirebase(imageUri: Uri) {
         try {
             val user = firebaseAuth.currentUser!!.uid
             val imageRef = firebaseStorage.reference.child("images/$user/avatar.jpg")
-            val uploadTask = imageRef.putFile(imageUri).await()
-            val downloadUrl = imageRef.downloadUrl.await()
+            val uploadTask = imageRef.putFile(imageUri)
+            val downloadUrl = imageRef.downloadUrl
 
             firestore.collection("users").document(user)
                 .update("imageUrl", downloadUrl.toString())
@@ -104,20 +101,17 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUserDocumentById(userId: String): UserDomain? = suspendCoroutine { continuation ->
+    override fun getUserDocumentById(userId: String, onComplete: (UserDomain?) -> Unit) {
         try {
             val docRef = firestore.collection(COLLECTION_NAME_USERS).document(userId)
             docRef.get()
                 .addOnSuccessListener { documentSnapshot ->
                     if (documentSnapshot != null) {
                         val user = documentSnapshot.toObject<UserDomain>()
-                        continuation.resume(user)
-                    } else {
-                        continuation.resume(null)
+                        onComplete(user)
                     }
                 }
         } catch (e: Exception) {
-            continuation.resumeWithException(e)
             Log.d("getUserDocumentByIdError", e.message.toString())
         }
     }

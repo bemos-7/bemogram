@@ -21,7 +21,7 @@ fun MessageItem(
     if (message.senderId == userId) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.End
         ) {
             Card(
                 modifier = Modifier.padding(10.dp)
@@ -38,7 +38,7 @@ fun MessageItem(
     } else {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.End
+            horizontalAlignment = Alignment.Start
         ) {
             Card(
                 modifier = Modifier.padding(10.dp)

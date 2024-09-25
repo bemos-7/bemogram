@@ -19,7 +19,7 @@ interface FirebaseRealtimeDatabaseRepository {
 
     fun listenForMessages(
         chatId: String,
-        onNewMessage: (MessageDomain) -> Unit
+        onNewMessage: (List<MessageDomain>) -> Unit
     )
 
 }
