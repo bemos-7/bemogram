@@ -81,9 +81,9 @@ fun UserChatContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyColumn {
-                items(items = messagesList) {
+                items(items = messagesList) { messageFromList ->
                     MessageItem(
-                        message = it,
+                        message = messageFromList,
                         userId = userId
                     )
                 }
@@ -109,7 +109,7 @@ fun UserChatContent(
                     onClick = {
                         sendMessage(
                             MessageDomain(
-                                chatId = "",
+                                chatId = chatId,
                                 text = message,
                                 senderId = userId
                             )
@@ -146,11 +146,16 @@ private fun UserChatContentPreview() {
                 chatId = "",
                 text = "hello",
                 senderId = ""
-            )
+            ),
+            MessageDomain(
+                chatId = "",
+                text = "hello, how are you?",
+                senderId = "bemos"
+            ),
         ),
         sendMessage = {},
         onBackIconClick = {},
-        "",
+        "bemos",
         "asjdkfhlqberjqebrg"
     )
 }

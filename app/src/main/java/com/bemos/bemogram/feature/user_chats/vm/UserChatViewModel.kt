@@ -44,9 +44,9 @@ class UserChatViewModel @Inject constructor(
     ) {
         listenForMessagesUseCase.execute(
             chatId = chatId,
-            onNewMessage = {
+            onNewMessage = { newMessage ->
                 messages.update {
-                    it
+                    newMessage
                 }
             }
         )
