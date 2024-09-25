@@ -6,16 +6,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface FirebaseFirestoreRepository {
 
-    suspend fun getUserDocument() : UserDomain?
+    fun getUserDocument(onComplete: (UserDomain?) -> Unit)
 
-    suspend fun getAllUsers() : List<UserDomain>
+    fun getAllUsers(onUserList: (List<UserDomain>) -> Unit)
 
     fun getUserUid() : String
 
-    suspend fun updateUserProfile(name: String, surname: String = "", userImage: Uri?)
+    fun updateUserProfile(name: String, surname: String = "", userImage: Uri?)
 
-    suspend fun uploadImageToFirebase(imageUri: Uri)
+    fun uploadImageToFirebase(imageUri: Uri)
 
-    suspend fun getUserDocumentById(userId: String): UserDomain?
+    fun getUserDocumentById(userId: String, onComplete: (UserDomain?) -> Unit)
 
 }
