@@ -1,5 +1,6 @@
 package com.bemos.bemogram.data.firebase
 
+import androidx.compose.runtime.currentComposer
 import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import com.bemos.bemogram.domain.model.MessageDomain
 import com.google.firebase.database.ChildEventListener
@@ -7,13 +8,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
+import com.google.firebase.database.ValueEventListener
 import javax.inject.Inject
 
 class FirebaseRealtimeDatabaseImpl @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ) : FirebaseRealtimeDatabaseRepository {
     override fun createChat(firstUserId: String, secondUserId: String) {
-        val chatsRef = firebaseDatabase.reference.database.getReference("chats")
+        val chatsRef = firebaseDatabase.getReference("chats")
         val newChatRef = chatsRef.push()
         val chatData = mapOf(
             "participants" to mapOf(firstUserId to true, secondUserId to true)
@@ -37,7 +39,7 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
     }
 
     override fun getUserChats(userId: String, onComplete: (List<String>) -> Unit) {
-        val userChatsRef = firebaseDatabase.reference.database.getReference("users").child(userId).child("chats")
+        val userChatsRef = firebaseDatabase.getReference("users").child(userId).child("chats")
         userChatsRef.get().addOnSuccessListener { dataSnapshot ->
             val chatId = dataSnapshot.children.map { it.key!! }
             onComplete(chatId)
@@ -55,34 +57,18 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
         messageRef.push().setValue(messages)
     }
 
-    override fun listenForMessages(chatId: String, onNewMessage: (MessageDomain) -> Unit) {
+    override fun listenForMessages(chatId: String, onNewMessage: (List<MessageDomain>) -> Unit) {
         val messagesRef = firebaseDatabase.getReference("chats").child(chatId).child("messages")
 
-        messagesRef.addChildEventListener(object : ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val message = snapshot.getValue(MessageDomain::class.java)
-                message?.let {
-                    onNewMessage(it)
+        messagesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val messages = snapshot.children.mapNotNull {
+                    it.getValue(MessageDomain::class.java)
                 }
+                onNewMessage(messages)
             }
 
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 
