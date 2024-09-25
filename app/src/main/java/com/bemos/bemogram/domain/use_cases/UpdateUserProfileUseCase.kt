@@ -7,7 +7,7 @@ import javax.inject.Inject
 class UpdateUserProfileUseCase @Inject constructor(
     private val repository: FirebaseFirestoreRepository
 ) {
-    suspend fun execute(
+    fun execute(
         name: String,
         surname: String,
         imageUser: Uri?

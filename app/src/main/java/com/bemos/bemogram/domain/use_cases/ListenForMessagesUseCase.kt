@@ -7,7 +7,7 @@ import javax.inject.Inject
 class ListenForMessagesUseCase @Inject constructor(
     private val repository: FirebaseRealtimeDatabaseRepository
 ) {
-    fun execute(chatId: String, onNewMessage: (MessageDomain) -> Unit) {
+    fun execute(chatId: String, onNewMessage: (List<MessageDomain>) -> Unit) {
         repository.listenForMessages(
             chatId = chatId,
             onNewMessage = {

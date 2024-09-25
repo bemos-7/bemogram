@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetAllUsersUseCase @Inject constructor(
     private val firebaseFirestoreRepository: FirebaseFirestoreRepository
 ) {
-    suspend fun execute(): List<UserDomain> {
-        return firebaseFirestoreRepository.getAllUsers()
+    fun execute(onUserList: (List<UserDomain>) -> Unit) {
+        return firebaseFirestoreRepository.getAllUsers(onUserList)
     }
 }
