@@ -3,6 +3,7 @@ package com.bemos.bemogram.feature.user_chats.utils.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +25,8 @@ fun MessageItem(
             horizontalAlignment = Alignment.End
         ) {
             Card(
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier.padding(10.dp),
+                shape = RoundedCornerShape(topEnd = 25.dp, topStart = 30.dp, bottomStart = 30.dp, bottomEnd = 10.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)
@@ -41,7 +43,8 @@ fun MessageItem(
             horizontalAlignment = Alignment.Start
         ) {
             Card(
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier.padding(10.dp),
+                shape = RoundedCornerShape(topEnd = 30.dp, topStart = 25.dp, bottomStart = 10.dp, bottomEnd = 30.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)

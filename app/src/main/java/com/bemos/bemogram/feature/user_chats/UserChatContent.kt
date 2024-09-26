@@ -76,9 +76,7 @@ fun UserChatContent(
         }
     ) {
         Column(
-            modifier = Modifier.padding(top = 50.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.padding(top = 50.dp, bottom = 80.dp).fillMaxSize(),
         ) {
             LazyColumn {
                 items(items = messagesList) { messageFromList ->
@@ -88,6 +86,7 @@ fun UserChatContent(
                     )
                 }
             }
+
         }
         Column(
             modifier = Modifier

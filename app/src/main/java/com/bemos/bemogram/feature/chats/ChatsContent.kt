@@ -17,12 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.chats.utils.ui.ChatsItem
 
 @Composable
 fun ChatsContent(
-    chatsList: List<String>,
+    chatsList: List<ChatUserDomain>,
     onChatClick: (String) -> Unit
 ) {
     Scaffold(
@@ -50,17 +51,15 @@ fun ChatsContent(
 //                        )
 //                    }
 //                }
+
                 LazyColumn {
                     items(
-                        items = chatsList
-                    ) {
-                        Text(
-                            modifier = Modifier.clickable {
-                                onChatClick(it)
-                            },
-                            text = it
+                       items = chatsList
+                    ) { user ->
+                        ChatsItem(
+                            user = user,
+                            onUserClick = onChatClick
                         )
-                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }

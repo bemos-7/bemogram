@@ -1,5 +1,6 @@
 package com.bemos.bemogram.feature.chats.utils.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,14 +17,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.UserDomain
 
 @Composable
 fun ChatsItem(
-    userDocument: UserDomain
+    user: ChatUserDomain,
+    onUserClick: (String) -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onUserClick(user.chatId)
+            }
     ) {
         Row(
             modifier = Modifier
@@ -36,13 +43,13 @@ fun ChatsItem(
                 shape = RoundedCornerShape(1000.dp)
             ) {
                 AsyncImage(
-                    model = userDocument.imageUrl,
+                    model = user.user.imageUrl,
                     contentDescription = null
                 )
             }
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = userDocument.username ?: "",
+                text = user.user.username ?: "",
                 fontSize = 18.sp
             )
         }
@@ -53,8 +60,10 @@ fun ChatsItem(
 @Composable
 private fun ChatsItemsPreview() {
     ChatsItem(
-        UserDomain(
-            username = "bemos"
-        )
+        user = ChatUserDomain(
+            user = UserDomain(),
+            chatId = ""
+        ),
+        onUserClick = {}
     )
 }

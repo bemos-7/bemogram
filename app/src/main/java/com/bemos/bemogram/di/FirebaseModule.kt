@@ -73,10 +73,12 @@ object FirebaseModule {
 
     @Provides
     fun provideFirebaseReealtimeDatabaseRepository(
-        firebaseDatabase: FirebaseDatabase
+        firebaseDatabase: FirebaseDatabase,
+        firebaseFirestore: FirebaseFirestore
     ) : FirebaseRealtimeDatabaseRepository {
         return FirebaseRealtimeDatabaseImpl(
-            firebaseDatabase = firebaseDatabase
+            firebaseDatabase = firebaseDatabase,
+            firestore = firebaseFirestore
         )
     }
 }
