@@ -1,18 +1,25 @@
 package com.bemos.bemogram.data.firebase
 
+import android.util.Log
 import androidx.compose.runtime.currentComposer
 import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.MessageDomain
+import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 import javax.inject.Inject
 
 class FirebaseRealtimeDatabaseImpl @Inject constructor(
-    private val firebaseDatabase: FirebaseDatabase
+    private val firebaseDatabase: FirebaseDatabase,
+    private val firestore: FirebaseFirestore
 ) : FirebaseRealtimeDatabaseRepository {
     override fun createChat(firstUserId: String, secondUserId: String) {
         val chatsRef = firebaseDatabase.getReference("chats")
@@ -38,11 +45,79 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
             }
     }
 
-    override fun getUserChats(userId: String, onComplete: (List<String>) -> Unit) {
+    override fun getUserChats(userId: String, onComplete: (List<ChatUserDomain>) -> Unit) {
         val userChatsRef = firebaseDatabase.getReference("users").child(userId).child("chats")
+
         userChatsRef.get().addOnSuccessListener { dataSnapshot ->
-            val chatId = dataSnapshot.children.map { it.key!! }
-            onComplete(chatId)
+            val chatIds = dataSnapshot.children.map { it.key!! }
+            val chatUserDomains = mutableListOf<ChatUserDomain>()
+
+            if (chatIds.isEmpty()) {
+                onComplete(chatUserDomains)
+                return@addOnSuccessListener
+            }
+
+            var totalRequests = 0
+            var completedCount = 0
+
+            chatIds.forEach { chatId ->
+                val participantsRef = firebaseDatabase.getReference("chats").child(chatId).child("participants")
+                participantsRef.get().addOnSuccessListener { snapshot ->
+                    val usersList = snapshot.children.map { it.key!! }
+                    totalRequests += usersList.size // Подсчитываем общее количество запросов
+
+                    usersList.forEach { participantId ->
+                        if (participantId != userId) {
+                            // Получаем данные пользователя из Firestore
+                            val userRef = firestore.collection("users").document(participantId)
+                            userRef.get().addOnSuccessListener { userSnapshot ->
+                                if (userSnapshot.exists()) {
+                                    val userDocument = userSnapshot.toObject(UserDomain::class.java)
+
+                                    if (userDocument != null) {
+                                        chatUserDomains.add(
+                                            ChatUserDomain(
+                                                user = userDocument,
+                                                chatId = chatId
+                                            )
+                                        )
+                                    }
+                                } else {
+                                    Log.e("Firestore", "User document not found for participantId: $participantId")
+                                }
+
+                                completedCount++
+                                if (completedCount == totalRequests) {
+                                    onComplete(chatUserDomains) // Вызываем onComplete, когда все запросы завершены
+                                }
+                            }.addOnFailureListener { e ->
+                                Log.e("Firestore", "Error getting user document: $e")
+                                completedCount++
+                                if (completedCount == totalRequests) {
+                                    onComplete(chatUserDomains)
+                                }
+                            }
+                        } else {
+                            // Увеличиваем счетчик для участников, если это текущий пользователь
+                            completedCount++
+                        }
+                    }
+
+                    // Если нет участников, вызываем onComplete сразу
+                    if (usersList.isEmpty()) {
+                        completedCount++
+                        if (completedCount == totalRequests) {
+                            onComplete(chatUserDomains)
+                        }
+                    }
+                }.addOnFailureListener { e ->
+                    Log.e("Realtime", "Error getting participants: $e")
+                    onComplete(chatUserDomains) // Завершаем выполнение в случае ошибки
+                }
+            }
+        }.addOnFailureListener { e ->
+            Log.e("Realtime", "Error getting user chats: $e")
+            onComplete(emptyList()) // Завершаем выполнение в случае ошибки
         }
     }
 
@@ -72,5 +147,19 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
         })
     }
 
+    private fun getUserDocumentById(userId: String, onComplete: (UserDomain?) -> Unit) {
+        try {
+            val docRef = firestore.collection(COLLECTION_NAME_USERS).document(userId)
+            docRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot != null) {
+                        val user = documentSnapshot.toObject<UserDomain>()
+                        onComplete(user)
+                    }
+                }
+        } catch (e: Exception) {
+            Log.d("getUserDocumentByIdError", e.message.toString())
+        }
+    }
 
 }
