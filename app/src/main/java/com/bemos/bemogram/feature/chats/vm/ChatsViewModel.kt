@@ -1,25 +1,29 @@
 package com.bemos.bemogram.feature.chats.vm
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.domain.use_cases.GetUserChatsUseCase
 import com.bemos.bemogram.domain.use_cases.GetUserDocumentByIdUseCase
 import com.bemos.bemogram.domain.use_cases.GetUserUidUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatsViewModel @Inject constructor(
     private val getUserChatsUseCase: GetUserChatsUseCase,
     private val getUserDocumentByIdUseCase: GetUserDocumentByIdUseCase,
-    private val getUserUidUseCase: GetUserUidUseCase
+    private val getUserUidUseCase: GetUserUidUseCase,
 ) : ViewModel() {
 
-    val userChats = MutableStateFlow(listOf(""))
-    val userDocument = MutableStateFlow<UserDomain?>(null)
-    val userUid = MutableStateFlow("")
+    val userChats = MutableStateFlow<List<ChatUserDomain>>(listOf())
+    private val userDocument = MutableStateFlow<UserDomain?>(null)
+    private val userUid = MutableStateFlow("")
 
     init {
         getUserUid()
@@ -33,25 +37,14 @@ class ChatsViewModel @Inject constructor(
         )
     }
 
-    fun getUserChats(
+    private fun getUserChats(
         userId: String,
-        onComplete: (List<String>) -> Unit
+        onComplete: (List<ChatUserDomain>) -> Unit
     ) {
         getUserChatsUseCase.execute(
             userId = userId,
             onComplete = {
                 onComplete(it)
-            }
-        )
-    }
-
-    fun getUserDocumentById(userId: String) {
-        getUserDocumentByIdUseCase.execute(
-            userId = userId,
-            onComplete = { user ->
-                userDocument.update {
-                    user
-                }
             }
         )
     }
