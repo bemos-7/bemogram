@@ -23,13 +23,22 @@ import com.bemos.bemogram.domain.model.UserDomain
 @Composable
 fun ChatsItem(
     user: ChatUserDomain,
-    onUserClick: (String) -> Unit
+    onUserClick: (ChatUserDomain) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(10.dp)
             .clickable {
-                onUserClick(user.chatId)
+                onUserClick(
+                    ChatUserDomain(
+                        user = UserDomain(
+                            username = user.user.username,
+                            imageUrl = user.user.imageUrl
+                        ),
+                        chatId = user.chatId
+                    )
+                )
             }
     ) {
         Row(
@@ -54,6 +63,7 @@ fun ChatsItem(
             )
         }
     }
+    Spacer(modifier = Modifier.width(10.dp))
 }
 
 @Preview
