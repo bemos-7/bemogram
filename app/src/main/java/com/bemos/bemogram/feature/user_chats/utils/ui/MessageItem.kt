@@ -26,7 +26,7 @@ fun MessageItem(
         ) {
             Card(
                 modifier = Modifier.padding(10.dp),
-                shape = RoundedCornerShape(topEnd = 25.dp, topStart = 30.dp, bottomStart = 30.dp, bottomEnd = 10.dp)
+                shape = RoundedCornerShape(topEnd = 10.dp, topStart = 30.dp, bottomStart = 30.dp, bottomEnd = 20.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)
@@ -44,7 +44,7 @@ fun MessageItem(
         ) {
             Card(
                 modifier = Modifier.padding(10.dp),
-                shape = RoundedCornerShape(topEnd = 30.dp, topStart = 25.dp, bottomStart = 10.dp, bottomEnd = 30.dp)
+                shape = RoundedCornerShape(topEnd = 30.dp, topStart = 10.dp, bottomStart = 20.dp, bottomEnd = 30.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)

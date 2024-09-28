@@ -18,6 +18,7 @@ object Constants {
     const val NAV_NAME_FORGOT_PASSWORD = "forgotPass"
 
     const val NAV_INTENT_ITEM_USER = "user"
+    const val NAV_INTENT_ITEM_USER_INFO = "userInfo"
     const val NAV_INTENT_ITEM_CHAT_ID = "chatId"
 
 }

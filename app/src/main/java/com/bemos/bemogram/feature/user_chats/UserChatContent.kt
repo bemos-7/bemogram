@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,10 +33,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.bemos.bemogram.R
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.MessageDomain
+import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.user_chats.utils.ui.MessageItem
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
 
@@ -44,7 +51,8 @@ fun UserChatContent(
     sendMessage: (MessageDomain) -> Unit,
     onBackIconClick: () -> Unit,
     userId: String,
-    chatId: String
+    chatId: String,
+    user: ChatUserDomain
 ) {
     var message by remember {
         mutableStateOf("")
@@ -69,9 +77,34 @@ fun UserChatContent(
                     contentDescription = null
                 )
 
-                Text(
-                    text = chatId
-                )
+                Card(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .align(
+                            alignment = Alignment.CenterVertically
+                        ),
+                    shape = RoundedCornerShape(1000.dp)
+                ) {
+                    AsyncImage(
+                        model = user.user.imageUrl ?: "",
+                        contentDescription = null
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Column {
+                    Text(
+                        text = user.user.username ?: "",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Status",
+                        fontSize = 12.sp,
+                    )
+                }
+
             }
         }
     ) {
@@ -155,6 +188,12 @@ private fun UserChatContentPreview() {
         sendMessage = {},
         onBackIconClick = {},
         "bemos",
-        "asjdkfhlqberjqebrg"
+        "asjdkfhlqberjqebrg",
+        ChatUserDomain(
+            user = UserDomain(
+                username = "bemos"
+            ),
+            chatId = ""
+        )
     )
 }

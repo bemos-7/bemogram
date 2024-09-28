@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.bemos.bemogram.domain.model.ChatUserDomain
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.chats.ChatsScreen
 import com.bemos.bemogram.feature.edit_profile.EditProfileScreen
@@ -25,6 +26,7 @@ import com.bemos.bemogram.feature.user_chats.UserChatScreen
 import com.bemos.bemogram.feature.user_profile.UserProfileScreen
 import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_CHAT_ID
 import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
+import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER_INFO
 import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
 import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
 import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
@@ -212,16 +214,13 @@ private fun NavGraphBuilder.userChat(
     navController: NavController
 ) {
     composable(
-        route = NAV_NAME_USER_CHAT_WITH_CHAT_ID,
-        arguments = listOf(
-            navArgument(NAV_INTENT_ITEM_CHAT_ID) {
-                type = NavType.StringType
-            }
-        )
-    ) { navBackStackEntry ->
-        UserChatScreen(
-            navController = navController,
-            chatId = navBackStackEntry.arguments?.getString(NAV_INTENT_ITEM_CHAT_ID)!!
-        )
+        route = NAV_NAME_USER_CHAT,
+    ) {
+        navController.previousBackStackEntry?.savedStateHandle?.get<ChatUserDomain>(NAV_INTENT_ITEM_USER_INFO)?.let { user ->
+            UserChatScreen(
+                navController = navController,
+                user = user
+            )
+        }
     }
 }

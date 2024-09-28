@@ -8,6 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bemos.bemogram.domain.model.ChatUserDomain
+import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.chats.ChatsContent
 import com.bemos.bemogram.feature.user_chats.vm.UserChatViewModel
 import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
@@ -15,14 +17,14 @@ import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
 @Composable
 fun UserChatScreen(
     navController: NavController,
-    chatId: String
+    user: ChatUserDomain
 ) {
     val viewModel: UserChatViewModel = hiltViewModel()
 
     val messages by viewModel.messages.collectAsState()
     val userId by viewModel.userId.collectAsState()
 
-    viewModel.listenForMessages(chatId)
+    viewModel.listenForMessages(user.chatId)
     Log.d("messagesListener", messages.toString())
 
     UserChatContent(
@@ -36,6 +38,7 @@ fun UserChatScreen(
             navController.navigate(NAV_NAME_CHATS)
         },
         userId = userId,
-        chatId = chatId
+        chatId = user.chatId,
+        user = user
     )
 }

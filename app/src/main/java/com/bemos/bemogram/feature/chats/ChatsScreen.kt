@@ -2,14 +2,12 @@ package com.bemos.bemogram.feature.chats
 
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.chats.vm.ChatsViewModel
+import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER_INFO
 import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT
 
 @Composable
@@ -24,8 +22,9 @@ fun ChatsScreen(
 
     ChatsContent(
         chatsList = chatList,
-        onChatClick = {
-            navController.navigate("${NAV_NAME_USER_CHAT}/$it")
+        onChatClick = { userDoc ->
+            navController.currentBackStackEntry?.savedStateHandle?.set(NAV_INTENT_ITEM_USER_INFO, userDoc)
+            navController.navigate(NAV_NAME_USER_CHAT)
         }
     )
 }
