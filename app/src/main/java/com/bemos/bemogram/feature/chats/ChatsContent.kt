@@ -24,7 +24,7 @@ import com.bemos.bemogram.feature.chats.utils.ui.ChatsItem
 @Composable
 fun ChatsContent(
     chatsList: List<ChatUserDomain>,
-    onChatClick: (String) -> Unit
+    onChatClick: (ChatUserDomain) -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -42,16 +42,6 @@ fun ChatsContent(
             Column(
                 modifier = Modifier.padding(10.dp)
             ) {
-//                LazyColumn {
-//                    items(
-//                        items = chatsList
-//                    ) {
-//                        ChatsItem(
-//                            it
-//                        )
-//                    }
-//                }
-
                 LazyColumn {
                     items(
                        items = chatsList
@@ -74,6 +64,8 @@ private fun ChatsContentPreview() {
         chatsList = listOf(
 
         ),
-        onChatClick = {}
+        onChatClick = { userDoc ->
+
+        }
     )
 }
