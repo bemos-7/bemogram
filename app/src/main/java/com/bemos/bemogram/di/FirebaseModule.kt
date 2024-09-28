@@ -1,9 +1,11 @@
 package com.bemos.bemogram.di
 
 import com.bemos.bemogram.data.firebase.FirebaseAuthenticationImpl
+import com.bemos.bemogram.data.firebase.FirebaseCloudMessagingImpl
 import com.bemos.bemogram.data.firebase.FirebaseFirestoreImpl
 import com.bemos.bemogram.data.firebase.FirebaseRealtimeDatabaseImpl
 import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
+import com.bemos.bemogram.domain.interfaces.FirebaseCloudMessagingRepository
 import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
 import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import com.bemos.bemogram.domain.use_cases.FirebaseSignInUseCase
@@ -16,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.messaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
 import dagger.Module
@@ -45,6 +49,11 @@ object FirebaseModule {
     @Provides
     fun provideFirebaseFirestore() : FirebaseFirestore {
         return Firebase.firestore
+    }
+
+    @Provides
+    fun provideFirebaseMessaging() : FirebaseMessaging {
+        return Firebase.messaging
     }
 
     @Provides
@@ -79,6 +88,15 @@ object FirebaseModule {
         return FirebaseRealtimeDatabaseImpl(
             firebaseDatabase = firebaseDatabase,
             firestore = firebaseFirestore
+        )
+    }
+
+    @Provides
+    fun provideFirebaseCloudMessagingRepository(
+        firebaseMessaging: FirebaseMessaging
+    ) : FirebaseCloudMessagingRepository {
+        return FirebaseCloudMessagingImpl(
+            firebaseMessaging = firebaseMessaging
         )
     }
 }
