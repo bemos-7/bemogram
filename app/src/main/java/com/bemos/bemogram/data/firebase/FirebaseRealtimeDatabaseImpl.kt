@@ -90,12 +90,6 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
                                 if (completedCount == totalRequests) {
                                     onComplete(chatUserDomains) // Вызываем onComplete, когда все запросы завершены
                                 }
-                            }.addOnFailureListener { e ->
-                                Log.e("Firestore", "Error getting user document: $e")
-                                completedCount++
-                                if (completedCount == totalRequests) {
-                                    onComplete(chatUserDomains)
-                                }
                             }
                         } else {
                             // Увеличиваем счетчик для участников, если это текущий пользователь
@@ -118,6 +112,25 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
         }.addOnFailureListener { e ->
             Log.e("Realtime", "Error getting user chats: $e")
             onComplete(emptyList()) // Завершаем выполнение в случае ошибки
+        }
+    }
+
+    private fun getUserDocumentById(userId: String, onComplete: (UserDomain) -> Unit) {
+        try {
+            val docRef = firestore.collection(COLLECTION_NAME_USERS).document(userId)
+            docRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val userDocument = documentSnapshot.toObject(UserDomain::class.java)
+                        if (userDocument != null) {
+                            onComplete(
+                                userDocument
+                            )
+                        }
+                    }
+                }
+        } catch (e: Exception) {
+            Log.d("getUserDocumentByIdError", e.message.toString())
         }
     }
 
@@ -146,20 +159,4 @@ class FirebaseRealtimeDatabaseImpl @Inject constructor(
             override fun onCancelled(error: DatabaseError) {}
         })
     }
-
-    private fun getUserDocumentById(userId: String, onComplete: (UserDomain?) -> Unit) {
-        try {
-            val docRef = firestore.collection(COLLECTION_NAME_USERS).document(userId)
-            docRef.get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot != null) {
-                        val user = documentSnapshot.toObject<UserDomain>()
-                        onComplete(user)
-                    }
-                }
-        } catch (e: Exception) {
-            Log.d("getUserDocumentByIdError", e.message.toString())
-        }
-    }
-
 }
