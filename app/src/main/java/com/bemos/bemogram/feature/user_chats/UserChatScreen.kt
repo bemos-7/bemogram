@@ -35,7 +35,7 @@ fun UserChatScreen(
             )
         },
         onBackIconClick = {
-            navController.navigate(NAV_NAME_CHATS)
+            navController.popBackStack()
         },
         userId = userId,
         chatId = user.chatId,
