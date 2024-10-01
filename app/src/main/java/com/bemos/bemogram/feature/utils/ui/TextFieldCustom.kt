@@ -23,7 +23,7 @@ fun TextFieldCustom(
         label = {
             label?.let { it() }
         },
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(15.dp),
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
