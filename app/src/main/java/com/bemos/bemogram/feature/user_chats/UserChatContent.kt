@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -26,9 +27,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +47,7 @@ import com.bemos.bemogram.domain.model.MessageDomain
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.user_chats.utils.ui.MessageItem
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
+import kotlinx.coroutines.launch
 
 @Composable
 fun UserChatContent(
@@ -56,6 +60,24 @@ fun UserChatContent(
 ) {
     var message by remember {
         mutableStateOf("")
+    }
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        coroutineScope.launch {
+            if (messagesList.isNotEmpty()) {
+                listState.animateScrollToItem(messagesList.size - 1)
+            }
+        }
+    }
+
+    LaunchedEffect(messagesList) {
+        coroutineScope.launch {
+            if (messagesList.isNotEmpty()) {
+                listState.animateScrollToItem(messagesList.size - 1)
+            }
+        }
     }
 
     Scaffold(
@@ -109,9 +131,13 @@ fun UserChatContent(
         }
     ) {
         Column(
-            modifier = Modifier.padding(top = 50.dp, bottom = 80.dp).fillMaxSize(),
+            modifier = Modifier
+                .padding(top = 50.dp, bottom = 80.dp)
+                .fillMaxSize(),
         ) {
-            LazyColumn {
+            LazyColumn(
+                state = listState
+            ) {
                 items(items = messagesList) { messageFromList ->
                     MessageItem(
                         message = messageFromList,
