@@ -13,9 +13,9 @@ class UpdateUserProfileUseCase @Inject constructor(
         imageUser: Uri?
     ) {
         repository.updateUserProfile(
-            name,
-            surname,
-            imageUser
+            name = name,
+            surname = surname,
+            userImage = imageUser
         )
     }
 }
