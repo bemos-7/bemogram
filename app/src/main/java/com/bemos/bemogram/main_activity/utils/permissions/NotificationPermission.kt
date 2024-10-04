@@ -1,16 +1,15 @@
 package com.bemos.bemogram.main_activity.utils.permissions
 
 import android.Manifest
-import android.app.Activity
-import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.bemos.bemogram.data.firebase.FirebaseCloudMessagingImpl
+import javax.inject.Inject
 
-class NotificationPermission(
+class NotificationPermission @Inject constructor(
     private val firebaseCloudMessagingImpl: FirebaseCloudMessagingImpl
 ) : ComponentActivity() {
 
@@ -36,7 +35,7 @@ class NotificationPermission(
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         } else {
-            firebaseCloudMessagingImpl.getRegisterToken()
+            firebaseCloudMessagingImpl.getFCMToken(onComplete = {})
         }
     }
 
