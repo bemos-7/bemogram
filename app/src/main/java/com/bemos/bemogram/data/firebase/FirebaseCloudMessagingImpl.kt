@@ -9,11 +9,10 @@ import javax.inject.Inject
 class FirebaseCloudMessagingImpl @Inject constructor(
     private val firebaseMessaging: FirebaseMessaging
 ) : FirebaseCloudMessagingRepository {
-    override fun getRegisterToken() {
+    override fun getFCMToken(onComplete: (String) -> Unit) {
         firebaseMessaging.token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.d("FirebaseTokenMessaging", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
             }
             val token = task.result
             Log.d("FirebaseTokenMessaging", token)
