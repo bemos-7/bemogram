@@ -11,6 +11,7 @@ data class UserDomain(
     var imageUrl: String? = "",
     var name: String? = "",
     var surname: String? = "",
+    var notificationToken: String? = "",
     var following: List<String>? = emptyList(),
     var followers: List<String>? = emptyList(),
     var publications: List<Int>? = emptyList(),
