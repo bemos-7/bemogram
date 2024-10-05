@@ -14,6 +14,8 @@ interface FirebaseFirestoreRepository {
 
     fun updateUserProfile(name: String, surname: String = "", userImage: Uri?)
 
+    fun updateFCMToken(token: String)
+
     fun uploadImageToFirebase(imageUri: Uri)
 
     fun getUserDocumentById(userId: String, onComplete: (UserDomain?) -> Unit)
