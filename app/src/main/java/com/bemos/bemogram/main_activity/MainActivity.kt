@@ -3,6 +3,7 @@ package com.bemos.bemogram.main_activity
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -41,6 +42,7 @@ import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
 import com.bemos.bemogram.utils.Constants.NAV_NAME_SPLASH
 import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT
 import dagger.hilt.android.AndroidEntryPoint
+import ru.rustore.sdk.universalpush.RuStoreUniversalPushClient
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -85,7 +87,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(
     navController: NavHostController,

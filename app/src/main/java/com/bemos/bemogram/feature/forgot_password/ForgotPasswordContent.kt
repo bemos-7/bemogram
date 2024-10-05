@@ -125,7 +125,7 @@ fun ForgotPasswordContent(
                         )
                     },
                     shape = RoundedCornerShape(10.dp),
-                    colors = TextFieldDefaults.textFieldColors(
+                    colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     )
