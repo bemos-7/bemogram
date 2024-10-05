@@ -130,12 +130,13 @@ fun ProfileInfo(
         Card(
             modifier = Modifier
                 .size(100.dp)
-                .clip(RoundedCornerShape(1000.dp)),
+                .clip(RoundedCornerShape(1000.dp))
+                .align(alignment = Alignment.CenterVertically),
             shape = RoundedCornerShape(1000.dp)
         ) {
             if (userDocument?.imageUrl != null) {
                 AsyncImage(
-                    model = userDocument?.imageUrl ?: "",
+                    model = userDocument.imageUrl ?: "",
                     contentDescription = null
                 )
             } else {
