@@ -31,6 +31,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bemos.bemogram.main_activity.app_ui.AppUi
 import com.bemos.bemogram.main_activity.app_ui.BottomBarScreen
+import com.bemos.bemogram.main_activity.utils.permissions.NotificationPermission.RequestNotificationPermission
 import com.bemos.bemogram.main_activity.vm.MainActivityViewModel
 import com.bemos.bemogram.ui.theme.BemogramTheme
 import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
@@ -50,10 +51,9 @@ class MainActivity : ComponentActivity() {
             val bottomBarState = remember {
                 mutableStateOf(true)
             }
-            val viewModel: MainActivityViewModel = hiltViewModel()
             RequestNotificationPermission(
                 onPermissionGranted = {
-                    viewModel.getFCMToken(onComplete = {})
+
                 },
                 onPermissionDenied = {
 
@@ -138,31 +138,6 @@ fun BottomBar(
                     }
                 }
             )
-        }
-    }
-}
-
-@Composable
-fun RequestNotificationPermission(
-    onPermissionGranted: () -> Unit,
-    onPermissionDenied: () -> Unit
-) {
-    val notificationPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted ->
-            if (isGranted) {
-                onPermissionGranted()
-            } else {
-                onPermissionDenied()
-            }
-        }
-    )
-
-    LaunchedEffect(Unit) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            onPermissionGranted()
         }
     }
 }
