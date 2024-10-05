@@ -15,6 +15,7 @@ class FirebaseCloudMessagingImpl @Inject constructor(
                 Log.d("FirebaseTokenMessaging", "Fetching FCM registration token failed", task.exception)
             }
             val token = task.result
+            onComplete(token)
             Log.d("FirebaseTokenMessaging", token)
         })
     }
