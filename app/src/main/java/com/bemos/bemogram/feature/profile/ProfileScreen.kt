@@ -20,8 +20,6 @@ fun ProfileScreen(
     val viewModel: ProfileViewModel = hiltViewModel()
     val userDocument by viewModel.userDocument.collectAsState()
 
-    viewModel.getUserDocument()
-
     ProfileContent(
         userDocument = userDocument,
         settingsIcon = {

@@ -87,15 +87,32 @@ class FirebaseFirestoreImpl @Inject constructor(
         }
     }
 
+    override fun updateFCMToken(token: String) {
+        try {
+            val user = firebaseAuth.currentUser!!.uid
+            firestore.collection("users")
+                .document(user)
+                .update("notificationToken", token).addOnSuccessListener {
+                    Log.d("UpdateFCMToken", "FCMToken updated successfully")
+                }
+        } catch (e: Exception) {
+            Log.d("updateFCMTokenError", e.message.toString())
+        }
+    }
+
     override fun uploadImageToFirebase(imageUri: Uri) {
         try {
             val user = firebaseAuth.currentUser!!.uid
             val imageRef = firebaseStorage.reference.child("images/$user/avatar.jpg")
-            val uploadTask = imageRef.putFile(imageUri)
-            val downloadUrl = imageRef.downloadUrl
-
-            firestore.collection("users").document(user)
-                .update("imageUrl", downloadUrl.toString())
+            imageRef.putFile(imageUri).addOnSuccessListener {
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+                    val downloadUrl = uri.toString()
+                    firestore.collection("users").document(user)
+                        .update("imageUrl", downloadUrl).addOnSuccessListener {
+                            Log.d("uploadImageToFirebase", "Image URL updated successfully")
+                        }
+                }
+            }
         } catch (e: Exception) {
             Log.d("uploadImageToFirebaseError", e.message.toString())
         }
