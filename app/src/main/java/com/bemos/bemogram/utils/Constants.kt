@@ -21,4 +21,6 @@ object Constants {
     const val NAV_INTENT_ITEM_USER_INFO = "userInfo"
     const val NAV_INTENT_ITEM_CHAT_ID = "chatId"
 
+    const val PROJECT_ID = "CYJdN6nqjx2LarazPw5hAQNwXF36xbZY"
+    const val SERVICES_TOKEN = "nxUf91PyyYw5r2gWC9mLm2J4p1TansszRg1VP79-oUtAiaPy-rX7hvnTksht8KXf"
 }

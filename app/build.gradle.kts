@@ -102,4 +102,10 @@ dependencies {
     implementation ("ru.rustore.sdk:universalpush:6.1.0")
     implementation ("ru.rustore.sdk:universalrustore:6.1.0")
     implementation ("ru.rustore.sdk:universalfcm:6.1.0")
+    implementation(platform("ru.rustore.sdk:bom:6.1.0"))
+    implementation("ru.rustore.sdk:pushclient")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
