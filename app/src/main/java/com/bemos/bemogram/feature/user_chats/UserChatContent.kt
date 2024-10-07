@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun UserChatContent(
     messagesList: List<MessageDomain>,
-    sendMessage: (MessageDomain) -> Unit,
+    sendMessage: (MessageDomain, UserDomain) -> Unit,
     onBackIconClick: () -> Unit,
     userId: String,
     chatId: String,
@@ -169,7 +169,8 @@ fun UserChatContent(
                                 chatId = chatId,
                                 text = message,
                                 senderId = userId
-                            )
+                            ),
+                            user.user
                         )
                         message = ""
                     },
@@ -210,7 +211,9 @@ private fun UserChatContentPreview() {
                 senderId = "bemos"
             ),
         ),
-        sendMessage = {},
+        sendMessage = { messageDomain, userDomain ->  
+            
+        },
         onBackIconClick = {},
         "bemos",
         "asjdkfhlqberjqebrg",
