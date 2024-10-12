@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface PushNotificationRepositoryApi {
     @POST("v1/projects/{project_id}/messages:send")
-    fun sendPushNotification(
+    suspend fun sendPushNotification(
         @Header("Authorization") token: String,
         @Path("project_id") projectId: String,
         @Body notification: PushNotification
