@@ -23,27 +23,30 @@ fun UserChatScreen(
 
     val messages by viewModel.messages.collectAsState()
     val userId by viewModel.userId.collectAsState()
+    val userDocument by viewModel.userDoc.collectAsState()
 
     viewModel.listenForMessages(user.chatId)
+    Log.d("PushNotificationTest", user.user.username.toString())
     Log.d("messagesListener", messages.toString())
 
     UserChatContent(
         messagesList = messages,
-        sendMessage = { message, user ->
+        sendMessage = { message, userDoc ->
             viewModel.sendMessage(
                 message
             )
+            Log.d("PushNotificationTest", userDoc.userId.toString())
             viewModel.sendPushNotification(
                 PushNotification(
                     message = Message(
-                        token = user.notificationToken.toString(),
+                        token = userDoc.notificationToken.toString(),
                         notification = Notification(
                             title = "Message",
                             body = "This is a notification message!",
                         ),
                         android = AndroidNotification(
                             notification = AndroidNotificationDetails(
-                                title = user.username.toString(),
+                                title = userDocument?.username ?: "",
                                 body = message.text
                             )
                         )

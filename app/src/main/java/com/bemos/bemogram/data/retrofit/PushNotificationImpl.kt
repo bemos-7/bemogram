@@ -10,7 +10,7 @@ import javax.inject.Inject
 class PushNotificationImpl @Inject constructor(
     private val api: PushNotificationRepositoryApi
 ) : PushNotificationRepository {
-    override fun sendPushNotification(
+    override suspend fun sendPushNotification(
         token: String,
         projectId: String,
         notification: PushNotification

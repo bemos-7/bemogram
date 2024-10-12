@@ -33,8 +33,10 @@ fun ChatsItem(
                 onUserClick(
                     ChatUserDomain(
                         user = UserDomain(
+                            userId = user.user.userId,
                             username = user.user.username,
-                            imageUrl = user.user.imageUrl
+                            imageUrl = user.user.imageUrl,
+                            notificationToken = user.user.notificationToken
                         ),
                         chatId = user.chatId
                     )

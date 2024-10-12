@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bemos.bemogram.domain.model.MessageDomain
 import com.bemos.bemogram.domain.model.PushNotification
+import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.bemogram.domain.use_cases.GetUserDocumentByIdUseCase
 import com.bemos.bemogram.domain.use_cases.GetUserUidUseCase
 import com.bemos.bemogram.domain.use_cases.ListenForMessagesUseCase
 import com.bemos.bemogram.domain.use_cases.SendMessageUseCase
@@ -20,14 +22,17 @@ class UserChatViewModel @Inject constructor(
     private val sendMessageUseCase: SendMessageUseCase,
     private val listenForMessagesUseCase: ListenForMessagesUseCase,
     private val getUserUidUseCase: GetUserUidUseCase,
+    private val getUserDocumentByIdUseCase: GetUserDocumentByIdUseCase,
     private val sendPushNotificationUseCase: SendPushNotificationUseCase
 ) : ViewModel() {
 
     val messages = MutableStateFlow<List<MessageDomain>>(listOf())
     val userId = MutableStateFlow("")
+    val userDoc = MutableStateFlow<UserDomain?>(null)
 
     init {
         getUserUid()
+        getUserDoc()
     }
 
     fun sendMessage(
@@ -43,6 +48,17 @@ class UserChatViewModel @Inject constructor(
         userId.update {
             id
         }
+    }
+
+    private fun getUserDoc() {
+        getUserDocumentByIdUseCase.execute(
+            userId = userId.value,
+            onComplete = { user ->
+                userDoc.update {
+                    user
+                }
+            }
+        )
     }
 
     fun listenForMessages(
@@ -64,9 +80,9 @@ class UserChatViewModel @Inject constructor(
         val result = sendPushNotificationUseCase.execute(notification)
         result.onSuccess {
             Log.d("NotificationSend", "successfully")
-
         }.onFailure {
-            Log.d("NotificationSend", it.message.toString())
+            Log.e("NotificationSend", "Error occurred", it)
+            it.printStackTrace()
         }
     }
 

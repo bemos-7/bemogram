@@ -7,7 +7,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface PushNotificationRepository {
-    fun sendPushNotification(
+    suspend fun sendPushNotification(
         token: String,
         projectId: String,
         notification: PushNotification

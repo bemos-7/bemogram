@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.domain.use_cases.GetFCMTokenUseCase
 import com.bemos.bemogram.domain.use_cases.GetUserDocumentUseCase
+import com.bemos.bemogram.domain.use_cases.RuStoreGetPushTokenUseCase
 import com.bemos.bemogram.domain.use_cases.UpdateFCMTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getDocumentUseCase: GetUserDocumentUseCase,
-    private val getFCMToken: GetFCMTokenUseCase,
-    private val updateFCMTokenUseCase: UpdateFCMTokenUseCase
+    private val updateFCMTokenUseCase: UpdateFCMTokenUseCase,
+    private val ruStoreGetPushTokenUseCase: RuStoreGetPushTokenUseCase
 ) : ViewModel() {
 
 //    private val _userDocument = mutableStateOf<UserDomain?>(null)
@@ -52,11 +53,9 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun getToken() {
-        getFCMToken.execute(
-            onComplete = { fcmToken ->
-                isTokenCorrect(fcmToken)
-            }
-        )
+        ruStoreGetPushTokenUseCase.execute { pushToken ->
+            isTokenCorrect(pushToken)
+        }
     }
 
     private fun updateToken(token: String) {

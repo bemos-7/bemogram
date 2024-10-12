@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SendPushNotificationUseCase @Inject constructor(
     private val repository: PushNotificationRepository
 ) {
-    fun execute(pushNotification: PushNotification) : Result<Unit> {
+    suspend fun execute(pushNotification: PushNotification) : Result<Unit> {
        return repository.sendPushNotification(
            "",
            "",
