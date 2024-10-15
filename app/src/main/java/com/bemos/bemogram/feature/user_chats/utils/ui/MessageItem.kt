@@ -11,15 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bemos.bemogram.domain.model.MessageDomain
-import kotlin.time.measureTimedValue
+import com.bemos.domain.model.MessageDomain
 
 @Composable
 fun MessageItem(
-    message: MessageDomain,
+    messageDomain: MessageDomain,
     userId: String
 ) {
-    if (message.senderId == userId) {
+    if (messageDomain.senderId == userId) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.End
@@ -32,7 +31,7 @@ fun MessageItem(
                     modifier = Modifier.padding(10.dp)
                 ) {
                     Text(
-                        text = message.text
+                        text = messageDomain.text
                     )
                 }
             }
@@ -50,7 +49,7 @@ fun MessageItem(
                     modifier = Modifier.padding(10.dp)
                 ) {
                     Text(
-                        text = message.text
+                        text = messageDomain.text
                     )
                 }
             }
@@ -63,7 +62,7 @@ fun MessageItem(
 @Composable
 private fun MessageItemPreview() {
     MessageItem(
-        message = MessageDomain(
+        messageDomain = MessageDomain(
             chatId = "",
             text = "hello Pedro",
             senderId = ""

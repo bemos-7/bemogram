@@ -2,9 +2,8 @@ package com.bemos.bemogram.feature.sign_up.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bemos.bemogram.domain.use_cases.FirebaseSignUpUseCase
 import com.bemos.bemogram.feature.utils.emailValidation
-import com.bemos.bemogram.feature.utils.passwordConfirmation
+import com.bemos.domain.use_cases.FirebaseSignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

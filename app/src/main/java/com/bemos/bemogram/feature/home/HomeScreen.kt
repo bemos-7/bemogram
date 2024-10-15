@@ -5,14 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.home.vm.HomeViewModel
-import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER
-import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
-import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_PROFILE
+import com.bemos.shared.Constants.NAV_INTENT_ITEM_USER
+import com.bemos.shared.Constants.NAV_NAME_USER_PROFILE
 
 @Composable
 fun HomeScreen(

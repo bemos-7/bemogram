@@ -7,8 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.chats.vm.ChatsViewModel
-import com.bemos.bemogram.utils.Constants.NAV_INTENT_ITEM_USER_INFO
-import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT
+import com.bemos.shared.Constants.NAV_INTENT_ITEM_USER_INFO
+import com.bemos.shared.Constants.NAV_NAME_USER_CHAT
 
 @Composable
 fun ChatsScreen(

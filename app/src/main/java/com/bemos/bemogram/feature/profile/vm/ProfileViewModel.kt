@@ -1,19 +1,14 @@
 package com.bemos.bemogram.feature.profile.vm
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.bemos.bemogram.domain.model.UserDomain
-import com.bemos.bemogram.domain.use_cases.GetFCMTokenUseCase
-import com.bemos.bemogram.domain.use_cases.GetUserDocumentUseCase
-import com.bemos.bemogram.domain.use_cases.RuStoreGetPushTokenUseCase
-import com.bemos.bemogram.domain.use_cases.UpdateFCMTokenUseCase
+import com.bemos.domain.model.UserDomain
+import com.bemos.domain.use_cases.GetUserDocumentUseCase
+import com.bemos.domain.use_cases.RuStoreGetPushTokenUseCase
+import com.bemos.domain.use_cases.UpdateFCMTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

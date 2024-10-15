@@ -3,8 +3,8 @@ package com.bemos.bemogram.feature.home.vm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
-import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.model.UserDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

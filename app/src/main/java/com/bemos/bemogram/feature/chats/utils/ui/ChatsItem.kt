@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.bemos.bemogram.domain.model.ChatUserDomain
-import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.domain.model.ChatUserDomain
+import com.bemos.domain.model.UserDomain
 
 @Composable
 fun ChatsItem(

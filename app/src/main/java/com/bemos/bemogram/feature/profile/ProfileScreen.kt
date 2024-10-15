@@ -1,17 +1,13 @@
 package com.bemos.bemogram.feature.profile
 
-import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.profile.vm.ProfileViewModel
-import com.bemos.bemogram.utils.Constants.NAV_NAME_CHATS
-import com.bemos.bemogram.utils.Constants.NAV_NAME_SETTINGS
+import com.bemos.shared.Constants.NAV_NAME_CHATS
+import com.bemos.shared.Constants.NAV_NAME_SETTINGS
 
 @Composable
 fun ProfileScreen(

@@ -3,7 +3,7 @@ package com.bemos.bemogram.feature.edit_profile.vm
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bemos.bemogram.domain.use_cases.UpdateUserProfileUseCase
+import com.bemos.domain.use_cases.UpdateUserProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

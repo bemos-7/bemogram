@@ -1,48 +1,38 @@
 package com.bemos.bemogram.main_activity
 
-import android.Manifest
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bemos.bemogram.main_activity.app_ui.AppUi
 import com.bemos.bemogram.main_activity.app_ui.BottomBarScreen
 import com.bemos.bemogram.main_activity.utils.permissions.NotificationPermission.RequestNotificationPermission
-import com.bemos.bemogram.main_activity.vm.MainActivityViewModel
 import com.bemos.bemogram.ui.theme.BemogramTheme
-import com.bemos.bemogram.utils.Constants.NAV_NAME_EDIT_PROFILE
-import com.bemos.bemogram.utils.Constants.NAV_NAME_FORGOT_PASSWORD
-import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
-import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_UP
-import com.bemos.bemogram.utils.Constants.NAV_NAME_SPLASH
-import com.bemos.bemogram.utils.Constants.NAV_NAME_USER_CHAT
+import com.bemos.shared.Constants.NAV_NAME_EDIT_PROFILE
+import com.bemos.shared.Constants.NAV_NAME_FORGOT_PASSWORD
+import com.bemos.shared.Constants.NAV_NAME_SIGN_IN
+import com.bemos.shared.Constants.NAV_NAME_SIGN_UP
+import com.bemos.shared.Constants.NAV_NAME_SPLASH
+import com.bemos.shared.Constants.NAV_NAME_USER_CHAT
 import dagger.hilt.android.AndroidEntryPoint
-import ru.rustore.sdk.universalpush.RuStoreUniversalPushClient
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

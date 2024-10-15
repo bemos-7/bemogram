@@ -26,14 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.edit_profile.models.UserInfo
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
-import kotlin.contracts.contract
 
 @Composable
 fun EditProfileContent(
