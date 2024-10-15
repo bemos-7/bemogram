@@ -1,6 +1,6 @@
 package com.bemos.data.retrofit
 
-import com.bemos.data.mappers.PushMessage.toPushNotification
+import com.bemos.data.mappers.PushNotificationMapper.toPushNotification
 import com.bemos.data.retrofit.repository.PushNotificationRepositoryApi
 import com.bemos.domain.interfaces.PushNotificationRepository
 import com.bemos.domain.model.PushNotificationDomain
