@@ -1,7 +1,7 @@
-package com.bemos.bemogram.data.firebase
+package com.bemos.data.firebase
 
 import android.util.Log
-import com.bemos.bemogram.domain.interfaces.FirebaseCloudMessagingRepository
+import com.bemos.domain.interfaces.FirebaseCloudMessagingRepository
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import javax.inject.Inject

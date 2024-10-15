@@ -1,20 +1,15 @@
-package com.bemos.bemogram.data.firebase
+package com.bemos.data.firebase
 
 import android.net.Uri
 import android.util.Log
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
-import com.bemos.bemogram.domain.model.UserDomain
-import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.model.UserDomain
+import com.bemos.shared.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class FirebaseFirestoreImpl @Inject constructor(
     private val firestore: FirebaseFirestore,

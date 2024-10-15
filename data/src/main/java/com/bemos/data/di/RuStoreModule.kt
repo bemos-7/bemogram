@@ -1,7 +1,6 @@
-package com.bemos.bemogram.di
+package com.bemos.data.di
 
-import com.bemos.bemogram.data.ruStore.RuStoreImpl
-import com.bemos.bemogram.domain.interfaces.RuStoreRepository
+import com.bemos.domain.interfaces.RuStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +20,7 @@ object RuStoreModule {
     fun provideRuStoreRepository(
         ruStore: RuStoreUniversalPushClient
     ) : RuStoreRepository {
-        return RuStoreImpl(ruStore)
+        return com.bemos.data.ruStore.RuStoreImpl(ruStore)
     }
 
 }

@@ -1,8 +1,9 @@
-package com.bemos.bemogram.di
+package com.bemos.data.di
 
-import com.bemos.bemogram.data.retrofit.PushNotificationImpl
-import com.bemos.bemogram.data.retrofit.repository.PushNotificationRepositoryApi
-import com.bemos.bemogram.domain.interfaces.PushNotificationRepository
+import com.bemos.data.retrofit.PushNotificationImpl
+import com.bemos.data.retrofit.repository.PushNotificationRepositoryApi
+import com.bemos.domain.interfaces.PushNotificationRepository
+import com.bemos.shared.Constants.SEND_PUSH_NOTIFICATION_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +18,7 @@ object RetrofitModule {
     @Provides
     fun provideNotificationRetrofit() : Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://vkpns.rustore.ru/")
+            .baseUrl(SEND_PUSH_NOTIFICATION_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -1,7 +1,8 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.RuStoreRepository
+import com.bemos.domain.interfaces.RuStoreRepository
 import javax.inject.Inject
+
 
 class RuStoreGetPushTokenUseCase @Inject constructor(
     private val repository: RuStoreRepository

@@ -1,13 +1,11 @@
-package com.bemos.bemogram.data.firebase
+package com.bemos.data.firebase
 
 import android.util.Log
-import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
-import com.bemos.bemogram.domain.model.UserDomain
-import com.bemos.bemogram.utils.Constants
-import com.bemos.bemogram.utils.Constants.COLLECTION_NAME_USERS
+import com.bemos.data.models.User
+import com.bemos.domain.interfaces.FirebaseAuthenticationRepository
+import com.bemos.shared.Constants.COLLECTION_NAME_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import javax.inject.Inject
 
 class FirebaseAuthenticationImpl @Inject constructor(
@@ -25,7 +23,7 @@ class FirebaseAuthenticationImpl @Inject constructor(
         ).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val userId = firebaseAuth.currentUser?.uid!!
-                val obj = UserDomain(
+                val obj = User(
                     userId = userId,
                     username = username,
                     email = email,

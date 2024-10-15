@@ -1,6 +1,6 @@
-package com.bemos.bemogram.data.retrofit.repository
+package com.bemos.data.retrofit.repository
 
-import com.bemos.bemogram.domain.model.PushNotification
+import com.bemos.data.models.PushNotification
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

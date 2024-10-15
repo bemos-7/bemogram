@@ -1,16 +1,9 @@
-package com.bemos.bemogram.di
+package com.bemos.data.di
 
-import com.bemos.bemogram.data.firebase.FirebaseAuthenticationImpl
-import com.bemos.bemogram.data.firebase.FirebaseCloudMessagingImpl
-import com.bemos.bemogram.data.firebase.FirebaseFirestoreImpl
-import com.bemos.bemogram.data.firebase.FirebaseRealtimeDatabaseImpl
-import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
-import com.bemos.bemogram.domain.interfaces.FirebaseCloudMessagingRepository
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
-import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
-import com.bemos.bemogram.domain.use_cases.FirebaseSignInUseCase
-import com.bemos.bemogram.domain.use_cases.FirebaseSignUpUseCase
-import com.bemos.bemogram.domain.use_cases.IsUserAuthenticatedInFirebaseUseCase
+import com.bemos.domain.interfaces.FirebaseAuthenticationRepository
+import com.bemos.domain.interfaces.FirebaseCloudMessagingRepository
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -26,7 +19,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -61,7 +53,7 @@ object FirebaseModule {
         firebaseAuth: FirebaseAuth,
         firestore: FirebaseFirestore
     ) : FirebaseAuthenticationRepository {
-        return FirebaseAuthenticationImpl(
+        return com.bemos.data.firebase.FirebaseAuthenticationImpl(
             firebaseAuth = firebaseAuth,
             firebaseFirestore = firestore
         )
@@ -73,7 +65,7 @@ object FirebaseModule {
         firestore: FirebaseFirestore,
         firebaseStorage: FirebaseStorage
     ) : FirebaseFirestoreRepository {
-        return FirebaseFirestoreImpl(
+        return com.bemos.data.firebase.FirebaseFirestoreImpl(
             firestore = firestore,
             firebaseAuth = firebaseAuth,
             firebaseStorage = firebaseStorage
@@ -85,7 +77,7 @@ object FirebaseModule {
         firebaseDatabase: FirebaseDatabase,
         firebaseFirestore: FirebaseFirestore
     ) : FirebaseRealtimeDatabaseRepository {
-        return FirebaseRealtimeDatabaseImpl(
+        return com.bemos.data.firebase.FirebaseRealtimeDatabaseImpl(
             firebaseDatabase = firebaseDatabase,
             firestore = firebaseFirestore
         )
@@ -95,7 +87,7 @@ object FirebaseModule {
     fun provideFirebaseCloudMessagingRepository(
         firebaseMessaging: FirebaseMessaging
     ) : FirebaseCloudMessagingRepository {
-        return FirebaseCloudMessagingImpl(
+        return com.bemos.data.firebase.FirebaseCloudMessagingImpl(
             firebaseMessaging = firebaseMessaging
         )
     }

@@ -1,6 +1,5 @@
-package com.bemos.bemogram.data.firebase.hash_password
+package com.bemos.data.firebase.hash_password
 
-import androidx.compose.runtime.Composable
 import java.security.MessageDigest
 
 fun hashSha(password: String) : String {

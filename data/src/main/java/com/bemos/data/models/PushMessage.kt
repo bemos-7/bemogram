@@ -1,10 +1,10 @@
-package com.bemos.bemogram.domain.model
+package com.bemos.data.models
 
 data class PushNotification(
-    val message: Message
+    val message: MessageUser
 )
 
-data class Message(
+data class MessageUser(
     val token: String,
     val notification: Notification,
     val android: AndroidNotification? = null

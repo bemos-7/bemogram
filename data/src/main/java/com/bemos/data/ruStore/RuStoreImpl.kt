@@ -1,6 +1,6 @@
-package com.bemos.bemogram.data.ruStore
+package com.bemos.data.ruStore
 
-import com.bemos.bemogram.domain.interfaces.RuStoreRepository
+import com.bemos.domain.interfaces.RuStoreRepository
 import ru.rustore.sdk.universalpush.RuStoreUniversalPushClient
 import javax.inject.Inject
 

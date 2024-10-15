@@ -1,6 +1,6 @@
-package com.bemos.bemogram.data.firebase
+package com.bemos.data.firebase
 
-import com.bemos.bemogram.domain.interfaces.FCMNotificationServiceRepository
+import com.bemos.domain.interfaces.FCMNotificationServiceRepository
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import ru.rustore.sdk.universalpush.RuStoreUniversalPushManager
