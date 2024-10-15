@@ -1,4 +1,4 @@
-package com.bemos.bemogram.utils
+package com.bemos.shared
 
 object Constants {
 
@@ -23,4 +23,5 @@ object Constants {
 
     const val PROJECT_ID = "CYJdN6nqjx2LarazPw5hAQNwXF36xbZY"
     const val SERVICES_TOKEN = "nxUf91PyyYw5r2gWC9mLm2J4p1TansszRg1VP79-oUtAiaPy-rX7hvnTksht8KXf"
+    const val SEND_PUSH_NOTIFICATION_URL = "https://vkpns.rustore.ru/"
 }
