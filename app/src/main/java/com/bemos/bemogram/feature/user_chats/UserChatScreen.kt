@@ -6,13 +6,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.bemos.bemogram.domain.model.AndroidNotification
-import com.bemos.bemogram.domain.model.AndroidNotificationDetails
-import com.bemos.bemogram.domain.model.ChatUserDomain
-import com.bemos.bemogram.domain.model.Message
-import com.bemos.bemogram.domain.model.Notification
-import com.bemos.bemogram.domain.model.PushNotification
 import com.bemos.bemogram.feature.user_chats.vm.UserChatViewModel
+import com.bemos.domain.model.AndroidNotificationDetailsDomain
+import com.bemos.domain.model.AndroidNotificationDomain
+import com.bemos.domain.model.ChatUserDomain
+import com.bemos.domain.model.MessageUserDomain
+import com.bemos.domain.model.NotificationDomain
+import com.bemos.domain.model.PushNotificationDomain
 
 @Composable
 fun UserChatScreen(
@@ -37,15 +37,15 @@ fun UserChatScreen(
             )
             Log.d("PushNotificationTest", userDoc.userId.toString())
             viewModel.sendPushNotification(
-                PushNotification(
-                    message = Message(
+                PushNotificationDomain(
+                    messageUserDomain = MessageUserDomain(
                         token = userDoc.notificationToken.toString(),
-                        notification = Notification(
+                        notificationDomain = NotificationDomain(
                             title = "Message",
                             body = "This is a notification message!",
                         ),
-                        android = AndroidNotification(
-                            notification = AndroidNotificationDetails(
+                        android = AndroidNotificationDomain(
+                            notification = AndroidNotificationDetailsDomain(
                                 title = userDocument?.username ?: "",
                                 body = message.text
                             )

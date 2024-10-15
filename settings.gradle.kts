@@ -19,4 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "bemogram"
 include(":app")
- 
+include(":domain")
+include(":data")
+include(":shared")

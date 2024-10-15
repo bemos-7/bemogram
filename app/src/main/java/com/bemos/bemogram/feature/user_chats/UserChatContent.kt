@@ -40,11 +40,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.bemos.bemogram.R
-import com.bemos.bemogram.domain.model.ChatUserDomain
-import com.bemos.bemogram.domain.model.MessageDomain
-import com.bemos.bemogram.domain.model.UserDomain
 import com.bemos.bemogram.feature.user_chats.utils.ui.MessageItem
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustomNoLabel
+import com.bemos.domain.model.ChatUserDomain
+import com.bemos.domain.model.MessageDomain
+import com.bemos.domain.model.UserDomain
 import kotlinx.coroutines.launch
 
 @Composable
@@ -138,7 +138,7 @@ fun UserChatContent(
             ) {
                 items(items = messagesList) { messageFromList ->
                     MessageItem(
-                        message = messageFromList,
+                        messageDomain = messageFromList,
                         userId = userId
                     )
                 }

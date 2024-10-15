@@ -1,11 +1,10 @@
 package com.bemos.bemogram.feature.edit_profile
 
-import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bemos.bemogram.feature.edit_profile.vm.EditProfileViewModel
-import com.bemos.bemogram.utils.Constants.NAV_NAME_PROFILE
+import com.bemos.shared.Constants.NAV_NAME_PROFILE
 
 @Composable
 fun EditProfileScreen(

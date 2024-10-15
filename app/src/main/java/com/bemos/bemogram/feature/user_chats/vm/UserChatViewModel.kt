@@ -3,14 +3,14 @@ package com.bemos.bemogram.feature.user_chats.vm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bemos.bemogram.domain.model.MessageDomain
-import com.bemos.bemogram.domain.model.PushNotification
-import com.bemos.bemogram.domain.model.UserDomain
-import com.bemos.bemogram.domain.use_cases.GetUserDocumentByIdUseCase
-import com.bemos.bemogram.domain.use_cases.GetUserUidUseCase
-import com.bemos.bemogram.domain.use_cases.ListenForMessagesUseCase
-import com.bemos.bemogram.domain.use_cases.SendMessageUseCase
-import com.bemos.bemogram.domain.use_cases.SendPushNotificationUseCase
+import com.bemos.domain.model.MessageDomain
+import com.bemos.domain.model.PushNotificationDomain
+import com.bemos.domain.model.UserDomain
+import com.bemos.domain.use_cases.GetUserDocumentByIdUseCase
+import com.bemos.domain.use_cases.GetUserUidUseCase
+import com.bemos.domain.use_cases.ListenForMessagesUseCase
+import com.bemos.domain.use_cases.SendMessageUseCase
+import com.bemos.domain.use_cases.SendPushNotificationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -36,10 +36,10 @@ class UserChatViewModel @Inject constructor(
     }
 
     fun sendMessage(
-        message: MessageDomain
+        messageDomain: MessageDomain
     ) {
         sendMessageUseCase.execute(
-            message
+            messageDomain
         )
     }
 
@@ -75,7 +75,7 @@ class UserChatViewModel @Inject constructor(
     }
 
     fun sendPushNotification(
-        notification: PushNotification
+        notification: PushNotificationDomain
     ) = viewModelScope.launch {
         val result = sendPushNotificationUseCase.execute(notification)
         result.onSuccess {

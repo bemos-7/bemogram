@@ -31,7 +31,7 @@
         </activity>
 
         <service
-            android:name=".data.firebase.FCMNotificationServiceImpl"
+            android:name="com.bemos.data.firebase.FCMNotificationServiceImpl"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

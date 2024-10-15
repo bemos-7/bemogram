@@ -11,9 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.bemos.bemogram.R
-import com.bemos.bemogram.utils.Constants.NAV_NAME_SIGN_IN
 
 @Composable
 fun CustomDialog(

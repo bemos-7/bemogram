@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,10 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bemos.bemogram.domain.model.UserDomain
-import com.bemos.bemogram.feature.sign_in.SignInContent
 import com.bemos.bemogram.feature.utils.passwordConfirmation
 import com.bemos.bemogram.feature.utils.ui.TextFieldCustom
+import com.bemos.domain.model.UserDomain
 
 @Composable
 fun SignUpContent(
