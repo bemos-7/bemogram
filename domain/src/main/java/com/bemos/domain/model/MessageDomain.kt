@@ -1,4 +1,4 @@
-package com.bemos.bemogram.domain.model
+package com.bemos.domain.model
 
 data class MessageDomain(
     val chatId: String = "",

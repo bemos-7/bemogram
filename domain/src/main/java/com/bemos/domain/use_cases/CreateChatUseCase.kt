@@ -1,6 +1,6 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
+import com.bemos.domain.interfaces.FirebaseRealtimeDatabaseRepository
 import javax.inject.Inject
 
 class CreateChatUseCase @Inject constructor(

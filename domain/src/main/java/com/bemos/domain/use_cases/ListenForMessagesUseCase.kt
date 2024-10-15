@@ -1,7 +1,7 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseRealtimeDatabaseRepository
-import com.bemos.bemogram.domain.model.MessageDomain
+import com.bemos.domain.interfaces.FirebaseRealtimeDatabaseRepository
+import com.bemos.domain.model.MessageDomain
 import javax.inject.Inject
 
 class ListenForMessagesUseCase @Inject constructor(

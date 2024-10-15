@@ -1,7 +1,6 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
-import com.google.firebase.auth.FirebaseAuth
+import com.bemos.domain.interfaces.FirebaseAuthenticationRepository
 import javax.inject.Inject
 
 class FirebaseSignUpUseCase @Inject constructor(

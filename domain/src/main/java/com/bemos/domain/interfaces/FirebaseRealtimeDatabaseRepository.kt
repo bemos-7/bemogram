@@ -1,8 +1,7 @@
-package com.bemos.bemogram.domain.interfaces
+package com.bemos.domain.interfaces
 
-import com.bemos.bemogram.domain.model.ChatUserDomain
-import com.bemos.bemogram.domain.model.MessageDomain
-import com.bemos.bemogram.domain.model.UserDomain
+import com.bemos.domain.model.ChatUserDomain
+import com.bemos.domain.model.MessageDomain
 
 interface FirebaseRealtimeDatabaseRepository {
 
@@ -16,7 +15,7 @@ interface FirebaseRealtimeDatabaseRepository {
     )
 
     fun sendMessage(
-        message: MessageDomain
+        messageUserDomain: MessageDomain
     )
 
     fun listenForMessages(

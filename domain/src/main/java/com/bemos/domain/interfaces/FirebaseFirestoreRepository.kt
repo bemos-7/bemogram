@@ -1,8 +1,7 @@
-package com.bemos.bemogram.domain.interfaces
+package com.bemos.domain.interfaces
 
 import android.net.Uri
-import com.bemos.bemogram.domain.model.UserDomain
-import kotlinx.coroutines.flow.Flow
+import com.bemos.domain.model.UserDomain
 
 interface FirebaseFirestoreRepository {
 

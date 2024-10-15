@@ -1,6 +1,6 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseAuthenticationRepository
+import com.bemos.domain.interfaces.FirebaseAuthenticationRepository
 import javax.inject.Inject
 
 class FirebaseSendPasswordResetUseCase @Inject constructor(

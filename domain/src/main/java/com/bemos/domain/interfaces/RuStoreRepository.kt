@@ -1,4 +1,4 @@
-package com.bemos.bemogram.domain.interfaces
+package com.bemos.domain.interfaces
 
 interface RuStoreRepository {
 

@@ -1,8 +1,7 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
-import com.bemos.bemogram.domain.model.UserDomain
-import kotlinx.coroutines.flow.Flow
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.model.UserDomain
 import javax.inject.Inject
 
 class GetUserDocumentUseCase @Inject constructor(

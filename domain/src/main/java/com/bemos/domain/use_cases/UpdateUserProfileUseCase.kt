@@ -1,7 +1,7 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
 import android.net.Uri
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
 import javax.inject.Inject
 
 class UpdateUserProfileUseCase @Inject constructor(

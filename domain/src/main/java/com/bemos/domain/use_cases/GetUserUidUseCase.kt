@@ -1,6 +1,6 @@
-package com.bemos.bemogram.domain.use_cases
+package com.bemos.domain.use_cases
 
-import com.bemos.bemogram.domain.interfaces.FirebaseFirestoreRepository
+import com.bemos.domain.interfaces.FirebaseFirestoreRepository
 import javax.inject.Inject
 
 class GetUserUidUseCase @Inject constructor(
